@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { Theme, ThemeProviderContext } from './theme-context';
 
 type ThemeProviderProps = {
@@ -9,29 +9,21 @@ type ThemeProviderProps = {
 
 export function ThemeProvider({
   children,
-  defaultTheme = 'system',
-  storageKey = 'vite-ui-theme',
+  defaultTheme = 'beige',
+  storageKey = 'upsocial-theme',
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    const stored = localStorage.getItem(storageKey);
 
-  useEffect(() => {
+    return stored === 'dark' || stored === 'beige' ? stored : defaultTheme;
+  });
+
+  useLayoutEffect(() => {
     const root = window.document.documentElement;
 
-    root.classList.remove('light', 'dark');
-
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
-
-      root.classList.add(systemTheme);
-      return;
-    }
-
-    root.classList.add(theme);
+    root.classList.remove('light', 'dark', 'theme-beige', 'theme-dark');
+    root.classList.add(`theme-${theme}`);
   }, [theme]);
 
   const value = {

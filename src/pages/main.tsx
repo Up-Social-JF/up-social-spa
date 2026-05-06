@@ -1,28 +1,51 @@
-import { X } from 'lucide-react';
-import { Counter } from '@/components/counter';
-import { ViteLogo } from '@/components/logos/vite';
-import { ShadcnLogo } from '@/components/logos/shadcn';
-import { ModeToggle } from '../components/mode-toggle';
+import { ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { getImageSrc, getImageSrcSet, galleryThemes } from '@/content/gallery';
+import { site } from '@/content/site';
+
+const heroImage = galleryThemes.find((theme) => theme.slug === 'nature')!.cover;
 
 export function Main() {
-  const handleNavigateToRepo = () => {
-    window.open('https://github.com/Up-Social-JF/up-social-spa', '_blank');
-  };
-
   return (
-    <main className='min-h-screen bg-background flex flex-col items-center justify-center p-4'>
-      <div className='flex items-center justify-center gap-8 mb-12'>
-        <ViteLogo width={90} height={90} />
-        <X className='h-8 w-8' />
-        <ShadcnLogo width={90} height={90} />
+    <section className='relative min-h-svh overflow-hidden bg-[var(--ink)] text-[var(--paper)]'>
+      <picture>
+        <source srcSet={getImageSrcSet(heroImage, 'avif')} type='image/avif' />
+        <source srcSet={getImageSrcSet(heroImage, 'webp')} type='image/webp' />
+        <img
+          src={getImageSrc(heroImage, 'xl')}
+          alt={heroImage.alt}
+          className='absolute inset-0 h-full w-full object-cover object-center opacity-88'
+        />
+      </picture>
+      <div className='absolute inset-0 bg-[linear-gradient(180deg,rgb(10_10_10_/_68%)_0%,rgb(10_10_10_/_10%)_36%,rgb(10_10_10_/_82%)_100%)]' />
+      <div className='absolute inset-0 bg-[radial-gradient(circle_at_80%_18%,rgb(100_114_95_/_34%),transparent_34rem)]' />
+
+      <div className='relative z-10 flex min-h-svh flex-col justify-end px-4 pb-6 pt-28 sm:px-7 sm:pb-8 lg:px-10 lg:pb-10'>
+        <div className='max-w-5xl'>
+          <p className='mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--paper)]/75'>
+            München / Photography-led Marketing
+          </p>
+          <h1 className='max-w-[9ch] text-[clamp(3.4rem,15vw,9.8rem)] font-light leading-[0.88] tracking-[-0.075em] text-balance'>
+            Bilder, die Marken tragen.
+          </h1>
+          <p className='mt-5 max-w-md text-base leading-relaxed text-[var(--paper)]/82 sm:text-lg'>
+            Fotografie, Social, Ads und Web aus einer Hand.
+          </p>
+          <div className='mt-7 flex flex-col gap-3 sm:flex-row'>
+            <Button size='lg' className='border-[var(--paper)] bg-[var(--paper)] text-[var(--ink)]'>
+              {site.primaryCta}
+              <ArrowUpRight aria-hidden='true' />
+            </Button>
+            <Button
+              variant='outline'
+              size='lg'
+              className='border-[var(--paper)]/55 text-[var(--paper)] hover:border-[var(--paper)] hover:bg-[var(--paper)] hover:text-[var(--ink)]'
+            >
+              Arbeiten sehen
+            </Button>
+          </div>
+        </div>
       </div>
-      <h2 className='text-2xl font-bold mb-32'>Template</h2>
-      <Counter />
-      <div className='m-12'>
-        <ModeToggle />
-      </div>
-      <Button onClick={handleNavigateToRepo}>Use this template</Button>
-    </main>
+    </section>
   );
 }

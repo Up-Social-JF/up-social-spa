@@ -7,8 +7,7 @@ import { GalerieThemePage } from '@/pages/galerie-theme-page';
 import { KontaktPage } from '@/pages/kontakt-page';
 import { LeistungenPage } from '@/pages/leistungen-page';
 import { Main } from '@/pages/main';
-import { LegalPlaceholder, NotFoundPage, PlaceholderPage } from '@/pages/placeholders';
-import { pageIntros } from '@/content/site';
+import { LegalPlaceholder, NotFoundPage } from '@/pages/placeholders';
 
 export const Routes = () => {
   return (

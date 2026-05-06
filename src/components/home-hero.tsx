@@ -38,7 +38,7 @@ export function HomeHero() {
   const overlayOpacity = useTransform(scrollY, [0, 400], [1, 0.78]);
 
   return (
-    <section className='relative min-h-svh overflow-hidden bg-[var(--ink)] text-[var(--paper)]'>
+    <section className='relative min-h-[92svh] overflow-hidden bg-[var(--ink)] text-[var(--paper)]'>
       <motion.div
         aria-hidden='true'
         className='absolute inset-0'
@@ -73,7 +73,7 @@ export function HomeHero() {
         initial='hidden'
         animate='visible'
         variants={heroStagger}
-        className='relative z-10 flex min-h-svh flex-col justify-end px-4 pb-16 pt-28 sm:px-7 sm:pb-20 lg:px-10 lg:pb-24'
+        className='relative z-10 flex min-h-[92svh] flex-col justify-end px-4 pb-16 pt-28 sm:px-7 sm:pb-20 lg:px-10 lg:pb-24'
       >
         <div className='max-w-5xl'>
           <motion.p

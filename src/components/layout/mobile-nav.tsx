@@ -45,7 +45,7 @@ export function MobileNav({ variant }: MobileNavProps) {
 
       <SheetContent
         side='right'
-        className='flex w-[88vw] max-w-md flex-col gap-0 border-l border-border bg-background p-0 text-foreground sm:w-[480px]'
+        className='flex h-dvh w-[88vw] max-w-md flex-col gap-0 overflow-y-auto overscroll-contain border-l border-border bg-background p-0 text-foreground sm:w-[480px]'
       >
         <SheetTitle className='sr-only'>Navigation und Kontakt</SheetTitle>
 

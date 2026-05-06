@@ -11,7 +11,7 @@ export function KontaktPage() {
       <PageHero
         eyebrow={pageIntros.kontakt.eyebrow}
         title={pageIntros.kontakt.title}
-        description='WhatsApp, Instagram oder Mail — direkt. Buchungen über Calendly folgen in Kürze.'
+        description='WhatsApp, Telefon, Instagram oder Mail — direkt. Buchungen über Calendly folgen in Kürze.'
       />
 
       <section
@@ -29,7 +29,7 @@ export function KontaktPage() {
               <a
                 href={channel.disabled ? undefined : channel.href}
                 target={channel.external ? '_blank' : undefined}
-                rel={channel.external ? 'noreferrer' : undefined}
+                rel={channel.external ? 'noreferrer noopener' : undefined}
                 aria-disabled={channel.disabled || undefined}
                 className={cn(
                   'group flex h-full items-end justify-between gap-6 px-6 py-10 transition-colors duration-300 ease-editorial sm:px-10 sm:py-14',

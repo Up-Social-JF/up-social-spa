@@ -28,7 +28,6 @@ export const pageIntros = {
   kontakt: {
     eyebrow: 'Kontakt',
     title: 'Lass uns sprechen.',
-    description:
-      'WhatsApp, Instagram, Email und der Booking-Platzhalter werden im Contact-Slice final verdrahtet.',
+    description: 'WhatsApp, Telefon, Instagram oder E-Mail: such dir den direkten Kanal aus.',
   },
 };

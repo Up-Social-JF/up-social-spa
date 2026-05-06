@@ -1,7 +1,3 @@
-import { galleryThemes } from '@/content/gallery';
-
-const portrait = galleryThemes.find((theme) => theme.slug === 'people')!.cover;
-
 export const founder = {
   name: 'Julian Frey',
   role: 'Fotograf & Gründer aus München',
@@ -15,5 +11,5 @@ export const founder = {
   ],
   ctaLabel: 'Lerne Julian kennen',
   ctaHref: '/ueber-jf',
-  portrait,
+  portrait: '/images/julian.jpg',
 };

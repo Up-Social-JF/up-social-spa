@@ -116,7 +116,7 @@ export function CapabilityDetailPage() {
               </h2>
             </div>
           </header>
-          <ul className='grid list-none grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3'>
+          <ul className='grid list-none grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3'>
             {others.map((item) => (
               <li key={item.slug} className='flex'>
                 <CapabilityCard capability={item} className='flex-1' />

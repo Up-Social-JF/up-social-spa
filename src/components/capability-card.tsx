@@ -15,7 +15,7 @@ export function CapabilityCard({ capability, className }: CapabilityCardProps) {
   return (
     <article
       className={cn(
-        'group relative flex h-full flex-col gap-6 border border-border bg-[var(--color-bg-secondary)]/50 p-7 transition-colors duration-300 ease-editorial hover:border-[var(--accent-readable)] hover:bg-[var(--color-bg-secondary)] sm:p-8',
+        'group relative flex h-full flex-col gap-6 overflow-hidden border border-border bg-[var(--color-bg-secondary)]/50 p-7 transition-colors duration-300 ease-editorial hover:border-[var(--accent-readable)] hover:bg-[var(--color-bg-secondary)] sm:p-8',
         className
       )}
     >
@@ -31,11 +31,11 @@ export function CapabilityCard({ capability, className }: CapabilityCardProps) {
         </span>
       </div>
 
-      <header className='space-y-2'>
-        <h3 className='font-display text-2xl font-light leading-tight tracking-[-0.025em] text-foreground sm:text-3xl'>
+      <header className='min-w-0 space-y-2'>
+        <h3 className='text-balance font-display text-2xl font-light leading-tight tracking-[-0.025em] text-foreground sm:text-3xl'>
           {capability.name}
         </h3>
-        <p className='text-sm leading-relaxed text-muted-foreground sm:text-base'>
+        <p className='text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base'>
           {capability.subtitle}
         </p>
       </header>

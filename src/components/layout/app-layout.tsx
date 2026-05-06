@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router';
+import { ContactPanel } from '@/components/contact-panel';
 import { Footer } from './footer';
 import { Nav } from './nav';
 
@@ -10,6 +11,7 @@ export function AppLayout() {
         <Outlet />
       </main>
       <Footer />
+      <ContactPanel />
     </div>
   );
 }

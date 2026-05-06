@@ -1,11 +1,16 @@
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router';
 import { Button } from '@/components/ui/button';
 import { getImageSrc, getImageSrcSet, galleryThemes } from '@/content/gallery';
 import { site } from '@/content/site';
+import { useAppDispatch } from '@/store/store';
+import { actions as contactPanelActions } from '@/store/slices/contact-panel-slice';
 
 const heroImage = galleryThemes.find((theme) => theme.slug === 'nature')!.cover;
 
 export function Main() {
+  const dispatch = useAppDispatch();
+
   return (
     <section className='relative min-h-svh overflow-hidden bg-[var(--ink)] text-[var(--paper)]'>
       <picture>
@@ -32,16 +37,23 @@ export function Main() {
             Fotografie, Social, Ads und Web aus einer Hand.
           </p>
           <div className='mt-7 flex flex-col gap-3 sm:flex-row'>
-            <Button size='lg' className='border-[var(--paper)] bg-[var(--paper)] text-[var(--ink)]'>
+            <Button
+              type='button'
+              size='lg'
+              onClick={() => dispatch(contactPanelActions.open())}
+              aria-haspopup='dialog'
+              className='border-[var(--paper)] bg-[var(--paper)] text-[var(--ink)]'
+            >
               {site.primaryCta}
               <ArrowUpRight aria-hidden='true' />
             </Button>
             <Button
+              asChild
               variant='outline'
               size='lg'
               className='border-[var(--paper)]/55 text-[var(--paper)] hover:border-[var(--paper)] hover:bg-[var(--paper)] hover:text-[var(--ink)]'
             >
-              Arbeiten sehen
+              <Link to='/galerie'>Arbeiten sehen</Link>
             </Button>
           </div>
         </div>

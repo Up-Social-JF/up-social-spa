@@ -1,12 +1,16 @@
 import { Link, NavLink, useLocation } from 'react-router';
 import { Button } from '@/components/ui/button';
 import { LogoWide } from '@/components/logos/logo-wide';
+import { MobileNav } from '@/components/layout/mobile-nav';
 import { primaryNavItems } from '@/content/navigation';
 import { site } from '@/content/site';
+import { useAppDispatch } from '@/store/store';
+import { actions as contactPanelActions } from '@/store/slices/contact-panel-slice';
 import { cn } from '@/utils/cn';
 
 export function Nav() {
   const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
   const isHome = pathname === '/';
 
   return (
@@ -46,18 +50,22 @@ export function Nav() {
           ))}
         </div>
 
-        <div className='hidden items-center gap-3 sm:flex'>
+        <div className='hidden items-center gap-3 lg:flex'>
           <Button
-            asChild
+            type='button'
             size='sm'
+            onClick={() => dispatch(contactPanelActions.open())}
+            aria-haspopup='dialog'
             className={cn(
               isHome &&
                 'border-[var(--paper)] bg-[var(--paper)] text-[var(--ink)] hover:bg-[var(--paper)]/90'
             )}
           >
-            <Link to='/kontakt'>{site.primaryCta}</Link>
+            {site.primaryCta}
           </Button>
         </div>
+
+        <MobileNav variant={isHome ? 'home' : 'inner'} />
       </nav>
     </header>
   );

@@ -27,13 +27,12 @@
 
 ## Navigation Model
 
-- **Primary navigation** (top nav, max 4 items + brand + theme toggle + CTA):
+- **Primary navigation** (top nav, max 4 items + brand + CTA):
   - `Leistungen`
   - `Galerie`
   - `Über JF`
   - `Kontakt`
   - - Wordmark (left, links to `/`)
-  - - ThemeToggle (right, before CTA)
   - - Primary CTA "Jetzt buchen" (right-most, opens ContactPanel)
 
 - **Secondary navigation**:
@@ -43,11 +42,11 @@
 
 - **Utility navigation**:
   - Footer: full nav repeated, plus contact channels (WhatsApp / Instagram / Email), plus Impressum and Datenschutz at bottom.
-  - ThemeToggle lives in the top-right of the nav (next to "Jetzt buchen") on every page.
+  - The only theme control is a subtle footer-edge circle. There is no visible theme control in the top nav or mobile nav.
   - No "search". No language switcher (German-only).
 
 - **Mobile navigation**:
-  - Top bar collapses to: wordmark (left) · ThemeToggle (right of center) · Hamburger (right).
+  - Top bar collapses to: wordmark (left) · Hamburger (right).
   - Hamburger opens a right-slide Sheet covering ~85vw with stacked nav items (large editorial type), the four contact channels, and a full-width "Jetzt buchen" button at the bottom (acts as the page's primary CTA, NOT as the panel-opener — on mobile the sheet IS the contact panel for navigation context).
   - On non-home pages, the top of the mobile sheet shows current section (e.g., "Leistungen" highlighted) so users know where they are.
   - Sheet closes on link tap or backdrop tap.
@@ -157,10 +156,10 @@
 ### Flow 5: Theme switch
 
 1. Visitor on any page with default Beige theme.
-2. Clicks ThemeToggle (top-right of nav).
-3. Circular wipe animation reveals Dark theme from the toggle's coordinates over ~600ms.
+2. Finds the subtle footer-edge circle and clicks it.
+3. Theme swaps between Beige and Dark without adding a visible nav control.
 4. New theme persists across navigation and refreshes (localStorage).
-5. Logo wordmark swaps to its inverted variant inside the wipe (no flash).
+5. Logo wordmark remains visible against the active theme.
 
 ### Flow 6: Mobile nav
 
@@ -198,7 +197,7 @@
 | `CTABanner`                     | Home / Leistungen index / Capability detail / Galerie index / Theme detail / Über JF         | Same component; headline copy varies per page (config-driven)                                        |
 | `CapabilityCard`                | Home (full grid) / Leistungen index (full grid) / Capability detail (cross-link strip, 3-up) | Cross-link variant uses smaller numeral, no bullets, just title + subtitle + arrow                   |
 | `MotionInView`                  | Every section on every page                                                                  | Identical                                                                                            |
-| `ThemeProvider` + `ThemeToggle` | App-root + nav                                                                               | Identical everywhere                                                                                 |
+| `ThemeProvider` + footer switch | App-root + footer                                                                            | Hidden theme control only; no top-nav or mobile-nav toggle                                           |
 | `Lightbox`                      | Theme detail pages                                                                           | Identical                                                                                            |
 | `LegalLayout`                   | `/impressum` and `/datenschutz`                                                              | Same wrapper, different MD-derived content                                                           |
 | `Hero` (variant 1: editorial)   | Home, Über JF                                                                                | Full-bleed photo + overlaid type                                                                     |

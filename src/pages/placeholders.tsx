@@ -1,8 +1,6 @@
-import { Link, Navigate, useParams } from 'react-router';
+import { Link } from 'react-router';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { getCapabilityBySlug } from '@/content/capabilities';
-import { getGalleryThemeBySlug } from '@/content/gallery';
 import { site } from '@/content/site';
 
 type PlaceholderPageProps = {
@@ -32,42 +30,6 @@ export function PlaceholderPage({ eyebrow, title, description }: PlaceholderPage
         </Button>
       </div>
     </section>
-  );
-}
-
-export function CapabilityDetailPlaceholder() {
-  const { slug } = useParams();
-
-  const capability = getCapabilityBySlug(slug);
-
-  if (!capability) {
-    return <Navigate to='/404' replace />;
-  }
-
-  return (
-    <PlaceholderPage
-      eyebrow='Leistung'
-      title={capability.name}
-      description={capability.description}
-    />
-  );
-}
-
-export function GalleryThemePlaceholder() {
-  const { theme } = useParams();
-
-  const galleryTheme = getGalleryThemeBySlug(theme);
-
-  if (!galleryTheme) {
-    return <Navigate to='/404' replace />;
-  }
-
-  return (
-    <PlaceholderPage
-      eyebrow='Galerie Thema'
-      title={galleryTheme.name}
-      description={galleryTheme.description}
-    />
   );
 }
 

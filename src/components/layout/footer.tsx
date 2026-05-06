@@ -1,12 +1,16 @@
 import { Link } from 'react-router';
 import { LogoWide } from '@/components/logos/logo-wide';
+import { Button } from '@/components/ui/button';
 import { contactChannels } from '@/content/contact';
 import { legalNavItems, primaryNavItems } from '@/content/navigation';
 import { site } from '@/content/site';
 import { useTheme } from '@/hooks/use-theme';
+import { actions as contactPanelActions } from '@/store/slices/contact-panel-slice';
+import { useAppDispatch } from '@/store/store';
 
 export function Footer() {
   const { theme, setTheme } = useTheme();
+  const dispatch = useAppDispatch();
 
   return (
     <footer className='relative overflow-hidden bg-background px-5 py-10 text-foreground sm:px-8 lg:px-10'>
@@ -16,6 +20,15 @@ export function Footer() {
           <p className='mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground'>
             {site.claim}
           </p>
+          <Button
+            type='button'
+            size='sm'
+            onClick={() => dispatch(contactPanelActions.open())}
+            aria-haspopup='dialog'
+            className='mt-6'
+          >
+            {site.primaryCta}
+          </Button>
         </div>
 
         <nav aria-label='Footer Navigation' className='grid gap-3'>

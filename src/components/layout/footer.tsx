@@ -1,18 +1,18 @@
 import { Link } from 'react-router';
+import { LogoWide } from '@/components/logos/logo-wide';
 import { contactChannels } from '@/content/contact';
 import { legalNavItems, primaryNavItems } from '@/content/navigation';
 import { site } from '@/content/site';
+import { useTheme } from '@/hooks/use-theme';
 
 export function Footer() {
+  const { theme, setTheme } = useTheme();
+
   return (
     <footer className='bg-background px-5 py-10 text-foreground sm:px-8 lg:px-10'>
       <div className='mx-auto grid max-w-[var(--max-width-page)] gap-10 md:grid-cols-[1.3fr_1fr_1fr]'>
         <div>
-          <img
-            src={site.logoWide}
-            alt='UpSocial'
-            className='h-12 w-auto bg-[var(--ink)] py-3 pl-0 pr-4'
-          />
+          <LogoWide className='h-12 w-[18.2rem] text-foreground' />
           <p className='mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground'>
             {site.claim}
           </p>
@@ -47,6 +47,14 @@ export function Footer() {
             </Link>
           ))}
         </div>
+        <button
+          type='button'
+          aria-label='Theme wechseln'
+          onClick={() => setTheme(theme === 'beige' ? 'dark' : 'beige')}
+          className='group -m-2 flex size-6 items-center justify-center'
+        >
+          <span className='size-1.5 rounded-full bg-muted-foreground/35 transition-colors group-hover:bg-[var(--accent)]' />
+        </button>
       </div>
     </footer>
   );

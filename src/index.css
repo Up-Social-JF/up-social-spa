@@ -326,3 +326,42 @@
     transition-duration: 1ms !important;
   }
 }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   THEME WIPE — circular reveal on theme switch via View Transitions API
+   The ThemeToggle (footer-edge circle) sets --theme-wipe-x / --theme-wipe-y
+   to its viewport coordinates before calling document.startViewTransition().
+   Browsers without VT support fall back to an instant swap (no animation).
+   Reduce-motion users get instant swap (handled by the rule above).
+   ═══════════════════════════════════════════════════════════════════════════*/
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+  animation: theme-wipe-in var(--duration-slower) var(--easing-editorial);
+}
+
+@keyframes theme-wipe-in {
+  from {
+    clip-path: circle(0% at var(--theme-wipe-x, 100%) var(--theme-wipe-y, 100%));
+  }
+  to {
+    clip-path: circle(150% at var(--theme-wipe-x, 100%) var(--theme-wipe-y, 100%));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}

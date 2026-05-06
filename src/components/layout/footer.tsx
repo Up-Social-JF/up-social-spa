@@ -38,7 +38,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className='mx-auto mt-10 flex max-w-[var(--max-width-page)] flex-wrap justify-between gap-4 border-t border-border pt-5 text-xs uppercase tracking-[0.16em] text-muted-foreground'>
+      <div className='mx-auto mt-10 flex max-w-[var(--max-width-page)] flex-wrap justify-between gap-x-8 gap-y-4 border-t border-border pr-8 pt-5 text-xs uppercase tracking-[0.16em] text-muted-foreground md:pr-0'>
         <span>© {site.name}</span>
         <div className='flex gap-5'>
           {legalNavItems.map((item) => (
@@ -51,11 +51,17 @@ export function Footer() {
       <button
         type='button'
         aria-label='Theme wechseln'
-        onClick={() => setTheme(theme === 'beige' ? 'dark' : 'beige')}
-        className='group absolute -right-10 bottom-8 size-20 rounded-full border border-border bg-[var(--color-bg-tertiary)] transition-transform duration-200 ease-editorial hover:-translate-x-2 focus-visible:-translate-x-8 sm:-right-12 sm:size-24'
+        onClick={(event) => {
+          const rect = event.currentTarget.getBoundingClientRect();
+          setTheme(theme === 'beige' ? 'dark' : 'beige', {
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2,
+          });
+        }}
+        className='group absolute -right-6 bottom-5 size-12 rounded-full border border-border bg-[var(--color-bg-tertiary)] transition-transform duration-200 ease-editorial hover:-translate-x-1 focus-visible:-translate-x-5 sm:-right-8 sm:bottom-6 sm:size-16 md:-right-10 md:bottom-8 md:size-20 md:hover:-translate-x-2 md:focus-visible:-translate-x-8 lg:-right-12 lg:size-24'
       >
         <span className='sr-only'>Theme wechseln</span>
-        <span className='absolute left-5 top-1/2 size-2 -translate-y-1/2 rounded-full bg-[var(--accent)] opacity-70 transition-opacity group-hover:opacity-100' />
+        <span className='absolute left-3 top-1/2 size-1.5 -translate-y-1/2 rounded-full bg-[var(--accent)] opacity-70 transition-opacity group-hover:opacity-100 sm:left-4 sm:size-2 md:left-5' />
       </button>
     </footer>
   );

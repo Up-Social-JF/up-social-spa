@@ -2,9 +2,11 @@ import { createContext } from 'react';
 
 export type Theme = 'beige' | 'dark';
 
+export type ThemeOrigin = { x: number; y: number };
+
 export type ThemeProviderState = {
   theme: Theme;
-  setTheme: (theme: Theme) => void;
+  setTheme: (theme: Theme, origin?: ThemeOrigin) => void;
 };
 
 const initialState: ThemeProviderState = {

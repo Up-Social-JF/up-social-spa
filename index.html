@@ -1,21 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>up-social-spa</title>
+    <title>UpSocial</title>
     <script>
       (function () {
         try {
-          var stored = localStorage.getItem('vite-ui-theme');
-          var theme =
-            stored === 'dark' || stored === 'light'
-              ? stored
-              : window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? 'dark'
-                : 'light';
-          document.documentElement.classList.add(theme);
+          var stored = localStorage.getItem('upsocial-theme');
+          var theme = stored === 'dark' ? 'dark' : 'beige';
+          document.documentElement.classList.add('theme-' + theme);
         } catch (e) {}
       })();
     </script>

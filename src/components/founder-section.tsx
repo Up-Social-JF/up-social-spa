@@ -2,7 +2,6 @@ import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router';
 import { MotionInView } from '@/components/motion/motion-in-view';
 import { founder } from '@/content/founder';
-import { getImageSrc, getImageSrcSet } from '@/content/gallery';
 import { cn } from '@/utils/cn';
 
 type FounderSectionProps = {
@@ -27,17 +26,13 @@ export function FounderSection({ className, id }: FounderSectionProps) {
         className='mx-auto grid max-w-[var(--max-width-page)] gap-10 lg:grid-cols-[5fr_6fr] lg:items-center lg:gap-16'
       >
         <figure className='relative isolate aspect-[4/5] w-full overflow-hidden bg-[var(--color-bg-secondary)] sm:aspect-[3/4] lg:aspect-[4/5]'>
-          <picture>
-            <source srcSet={getImageSrcSet(founder.portrait, 'avif')} type='image/avif' />
-            <source srcSet={getImageSrcSet(founder.portrait, 'webp')} type='image/webp' />
-            <img
-              src={getImageSrc(founder.portrait, 'lg')}
-              alt={`Portrait von ${founder.name}, ${founder.role}`}
-              loading='lazy'
-              decoding='async'
-              className='h-full w-full object-cover object-center'
-            />
-          </picture>
+          <img
+            src={founder.portrait}
+            alt={`Portrait von ${founder.name}, ${founder.role}`}
+            loading='lazy'
+            decoding='async'
+            className='h-full w-full object-cover object-center'
+          />
           <span
             aria-hidden='true'
             className='pointer-events-none absolute inset-0 ring-1 ring-inset ring-[var(--ink)]/8'

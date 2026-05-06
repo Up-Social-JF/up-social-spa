@@ -7,7 +7,7 @@ import { GalerieThemePage } from '@/pages/galerie-theme-page';
 import { KontaktPage } from '@/pages/kontakt-page';
 import { LeistungenPage } from '@/pages/leistungen-page';
 import { Main } from '@/pages/main';
-import { LegalPlaceholder, NotFoundPage } from '@/pages/placeholders';
+import { DatenschutzPage, ImpressumPage, NotFoundPage } from '@/pages/placeholders';
 
 export const Routes = () => {
   return (
@@ -21,8 +21,8 @@ export const Routes = () => {
           <Route path='/galerie/:theme' element={<GalerieThemePage />} />
           <Route path='/ueber-jf' element={<AboutPage />} />
           <Route path='/kontakt' element={<KontaktPage />} />
-          <Route path='/impressum' element={<LegalPlaceholder type='Impressum' />} />
-          <Route path='/datenschutz' element={<LegalPlaceholder type='Datenschutz' />} />
+          <Route path='/impressum' element={<ImpressumPage />} />
+          <Route path='/datenschutz' element={<DatenschutzPage />} />
           <Route path='/404' element={<NotFoundPage />} />
           <Route path='*' element={<Navigate to='/404' replace />} />
         </Route>

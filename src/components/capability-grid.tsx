@@ -69,7 +69,7 @@ export function CapabilityGrid({
           as='ul'
           amount={0.15}
           staggerChildren={0.08}
-          className='grid list-none grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3'
+          className='grid list-none grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3'
         >
           {items.map((capability) => (
             <motion.li key={capability.slug} variants={itemVariants} className='flex'>

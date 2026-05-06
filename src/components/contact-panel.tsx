@@ -28,7 +28,7 @@ export function ContactPanel() {
     >
       <SheetContent
         side='right'
-        className='w-full border-l border-border bg-background p-0 text-foreground sm:max-w-md'
+        className='h-dvh w-full overflow-y-auto overscroll-contain border-l border-border bg-background p-0 text-foreground sm:max-w-md'
       >
         <SheetHeader className='gap-3 border-b border-border px-7 py-8 sm:px-10'>
           <p className='text-2xs font-semibold uppercase tracking-[0.24em] text-muted-foreground'>

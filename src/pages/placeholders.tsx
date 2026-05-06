@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -33,37 +34,165 @@ export function PlaceholderPage({ eyebrow, title, description }: PlaceholderPage
   );
 }
 
-export function LegalPlaceholder({ type }: { type: 'Impressum' | 'Datenschutz' }) {
+type LegalLayoutProps = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  children: ReactNode;
+};
+
+function LegalLayout({ eyebrow, title, intro, children }: LegalLayoutProps) {
   return (
-    <section className='px-5 py-24 sm:px-8 lg:px-10 lg:py-32'>
-      <article className='mx-auto max-w-[var(--max-width-content)]'>
-        <h1 className='text-4xl font-light tracking-tight sm:text-5xl'>{type}</h1>
-        <p className='mt-8 leading-relaxed text-muted-foreground'>
-          Platzhaltertext. Die finalen rechtlichen Angaben werden ergänzt, sobald Julian die
-          Produktionsdaten liefert.
-        </p>
+    <section className='bg-background px-5 py-24 text-foreground sm:px-8 sm:py-28 lg:px-10 lg:py-36'>
+      <article className='mx-auto grid max-w-[var(--max-width-page)] gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.4fr)] lg:gap-20'>
+        <header>
+          <p className='text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-readable)]'>
+            {eyebrow}
+          </p>
+          <h1 className='mt-4 max-w-2xl text-[clamp(2.75rem,7vw,6rem)] font-light leading-[0.94] tracking-[-0.05em] text-foreground'>
+            {title}
+          </h1>
+          <p className='mt-6 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg'>
+            {intro}
+          </p>
+        </header>
+
+        <div className='grid gap-10 border-t border-border pt-8 text-base leading-relaxed text-foreground/85 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0'>
+          {children}
+        </div>
       </article>
     </section>
   );
 }
 
+function LegalSection({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section aria-labelledby={title.toLowerCase().replaceAll(' ', '-')}>
+      <h2
+        id={title.toLowerCase().replaceAll(' ', '-')}
+        className='font-display text-2xl font-light leading-tight tracking-[-0.025em] text-foreground sm:text-3xl'
+      >
+        {title}
+      </h2>
+      <div className='mt-4 space-y-3 text-muted-foreground'>{children}</div>
+    </section>
+  );
+}
+
+export function ImpressumPage() {
+  return (
+    <LegalLayout
+      eyebrow='Rechtliches'
+      title='Impressum.'
+      intro='Diese Angaben sind vorbereitet und müssen vor Veröffentlichung mit den finalen Produktionsdaten ersetzt werden.'
+    >
+      <LegalSection title='Angaben gemäß § 5 TMG'>
+        <p>Julian Frey</p>
+        <p>UpSocial by JF</p>
+        <p>[Straße und Hausnummer ergänzen]</p>
+        <p>[PLZ] München</p>
+      </LegalSection>
+
+      <LegalSection title='Kontakt'>
+        <p>E-Mail: info@up-social.de</p>
+        <p>Telefon: +49 176 21384822</p>
+      </LegalSection>
+
+      <LegalSection title='Umsatzsteuer'>
+        <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:</p>
+        <p>[USt-IdNr. ergänzen, falls vorhanden]</p>
+      </LegalSection>
+
+      <LegalSection title='Verantwortlich für den Inhalt'>
+        <p>Julian Frey</p>
+        <p>[Adresse wie oben ergänzen]</p>
+      </LegalSection>
+    </LegalLayout>
+  );
+}
+
+export function DatenschutzPage() {
+  return (
+    <LegalLayout
+      eyebrow='Datenschutz'
+      title='Datenschutzerklärung.'
+      intro='Kurz, lesbar und als Platzhalter markiert, bis Hosting, Analytics und Kontaktdaten final bestätigt sind.'
+    >
+      <LegalSection title='Verantwortlicher'>
+        <p>Julian Frey, UpSocial by JF</p>
+        <p>[Adresse ergänzen]</p>
+        <p>E-Mail: info@up-social.de</p>
+      </LegalSection>
+
+      <LegalSection title='Zugriffsdaten und Hosting'>
+        <p>
+          Beim Besuch dieser Website können technische Zugriffsdaten verarbeitet werden, zum
+          Beispiel IP-Adresse, Zeitpunkt des Abrufs, Browsertyp und angefragte Seite. Die
+          Verarbeitung dient dem stabilen und sicheren Betrieb der Website.
+        </p>
+        <p>[Hosting-Anbieter und Speicherfristen ergänzen]</p>
+      </LegalSection>
+
+      <LegalSection title='Kontaktaufnahme'>
+        <p>
+          Wenn du per WhatsApp, Instagram oder E-Mail Kontakt aufnimmst, werden die von dir
+          übermittelten Daten zur Bearbeitung deiner Anfrage verarbeitet. Die Daten werden nicht
+          ohne Anlass an Dritte weitergegeben.
+        </p>
+      </LegalSection>
+
+      <LegalSection title='Analytics'>
+        <p>
+          Falls Umami oder ein vergleichbares datenschutzfreundliches Analytics-Tool eingesetzt
+          wird, wird dieser Abschnitt mit Anbieter, Zweck, Rechtsgrundlage und Opt-out-Hinweis
+          ergänzt.
+        </p>
+      </LegalSection>
+
+      <LegalSection title='Deine Rechte'>
+        <p>
+          Du hast nach Maßgabe der DSGVO Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung
+          der Verarbeitung, Datenübertragbarkeit und Beschwerde bei einer
+          Datenschutzaufsichtsbehörde.
+        </p>
+      </LegalSection>
+    </LegalLayout>
+  );
+}
+
 export function NotFoundPage() {
   return (
-    <section className='px-5 py-24 sm:px-8 lg:px-10 lg:py-32'>
-      <div className='mx-auto max-w-[var(--max-width-page)]'>
+    <section className='bg-background px-5 py-24 text-foreground sm:px-8 sm:py-28 lg:px-10 lg:py-36'>
+      <div className='mx-auto grid max-w-[var(--max-width-page)] gap-10 lg:grid-cols-[1fr_1.25fr] lg:items-end'>
         <Link
           to='/'
-          className='inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-muted-foreground hover:text-[var(--accent-readable)]'
+          className='inline-flex w-fit items-center gap-2 text-sm uppercase tracking-[0.18em] text-muted-foreground hover:text-[var(--accent-readable)]'
         >
           <ArrowLeft aria-hidden='true' className='size-4' />
           Zur Startseite
         </Link>
-        <h1 className='mt-8 max-w-3xl text-5xl font-light leading-tight tracking-tight sm:text-7xl'>
-          Diese Seite gibt es nicht — aber Bilder schon.
-        </h1>
-        <Button asChild className='mt-10'>
-          <Link to='/galerie'>Zur Galerie</Link>
-        </Button>
+        <div>
+          <p className='text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-readable)]'>
+            404
+          </p>
+          <h1 className='mt-4 max-w-4xl text-[clamp(3rem,8vw,7rem)] font-light leading-[0.94] tracking-[-0.05em] text-foreground'>
+            Diese Seite gibt es nicht.
+          </h1>
+          <p className='mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg'>
+            Der Weg ist falsch abgebogen. Die Galerie und die Leistungsseiten sind weiterhin da.
+          </p>
+          <div className='mt-10 flex flex-col gap-3 sm:flex-row'>
+            <Button asChild>
+              <Link to='/galerie'>Zur Galerie</Link>
+            </Button>
+            <Button asChild variant='outline'>
+              <Link to='/leistungen'>
+                Leistungen ansehen
+                <ArrowUpRight aria-hidden='true' />
+              </Link>
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -32,17 +32,13 @@ export function AboutPage() {
           className='mx-auto grid max-w-[var(--max-width-page)] gap-10 lg:grid-cols-[5fr_6fr] lg:items-center lg:gap-16'
         >
           <figure className='relative isolate aspect-[4/5] overflow-hidden bg-[var(--color-bg-tertiary)]'>
-            <picture>
-              <source srcSet={getImageSrcSet(founder.portrait, 'avif')} type='image/avif' />
-              <source srcSet={getImageSrcSet(founder.portrait, 'webp')} type='image/webp' />
-              <img
-                src={getImageSrc(founder.portrait, 'lg')}
-                alt={`${founder.name}, ${founder.role}`}
-                fetchPriority='high'
-                decoding='async'
-                className='h-full w-full object-cover object-center'
-              />
-            </picture>
+            <img
+              src={founder.portrait}
+              alt={`${founder.name}, ${founder.role}`}
+              fetchPriority='high'
+              decoding='async'
+              className='h-full w-full object-cover object-center'
+            />
             <span
               aria-hidden='true'
               className='pointer-events-none absolute inset-0 ring-1 ring-inset ring-[var(--ink)]/10'
@@ -153,7 +149,8 @@ export function AboutPage() {
               Schreib mir direkt.
             </h2>
             <p className='mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg'>
-              WhatsApp, Instagram oder Mail — antwortet bei mir persönlich, kein Posteingang-Team.
+              WhatsApp, Telefon, Instagram oder Mail — antwortet bei mir persönlich, kein
+              Posteingang-Team.
             </p>
           </div>
           <ul className='grid list-none gap-px border border-border bg-border'>
@@ -162,7 +159,7 @@ export function AboutPage() {
                 <a
                   href={channel.disabled ? undefined : channel.href}
                   target={channel.external ? '_blank' : undefined}
-                  rel={channel.external ? 'noreferrer' : undefined}
+                  rel={channel.external ? 'noreferrer noopener' : undefined}
                   aria-disabled={channel.disabled || undefined}
                   className={cn(
                     'flex items-center justify-between gap-6 px-6 py-6 transition-colors duration-200 ease-editorial sm:px-8 sm:py-7',

@@ -44,9 +44,19 @@ export function Footer() {
         </nav>
 
         <div className='grid content-start gap-3 text-sm text-muted-foreground'>
-          {contactChannels.slice(0, 3).map((channel) => (
-            <span key={channel.label}>{channel.label}</span>
-          ))}
+          {contactChannels
+            .filter((channel) => !channel.disabled)
+            .map((channel) => (
+              <a
+                key={channel.label}
+                href={channel.href}
+                target={channel.external ? '_blank' : undefined}
+                rel={channel.external ? 'noreferrer noopener' : undefined}
+                className='hover:text-[var(--accent-readable)]'
+              >
+                {channel.label}
+              </a>
+            ))}
           <span>Aus München. Für ganz DACH.</span>
         </div>
       </div>

@@ -68,12 +68,7 @@ export function GalerieThemePage() {
         aria-label={`${theme.name} Bilder`}
         className='bg-background px-5 pb-20 sm:px-8 sm:pb-24 lg:px-10 lg:pb-28'
       >
-        <MotionInView
-          as='ul'
-          amount={0.05}
-          staggerChildren={0.04}
-          className='mx-auto grid max-w-[var(--max-width-page)] list-none auto-rows-[14rem] grid-cols-1 gap-3 sm:auto-rows-[16rem] sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-5'
-        >
+        <ul className='mx-auto grid max-w-[var(--max-width-page)] list-none auto-rows-[14rem] grid-cols-1 gap-3 sm:auto-rows-[16rem] sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-5'>
           {images.map((image, index) => (
             <motion.li key={image.base} variants={tileVariants} className={masonrySpan(index)}>
               <button
@@ -96,7 +91,7 @@ export function GalerieThemePage() {
               </button>
             </motion.li>
           ))}
-        </MotionInView>
+        </ul>
       </section>
 
       <section

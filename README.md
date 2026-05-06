@@ -1,45 +1,110 @@
-# vite-shadcn template
+# UpSocial by JF SPA
 
-Welcome to my vite-shadcn template!
-Check it out here: [vite-shadcn](https://korbiqweidinger.github.io/vite-shadcn/)
+Photography-led marketing website for UpSocial by JF, built as a Vite + React single-page app.
+The site presents Julian Frey, his service capabilities, editorial gallery work, and direct contact paths for prospective Munich/DACH clients.
 
-## What is this template?
+## What Is Included
 
-This template is a starting point for building a web application using [Vite](https://vite.dev/) and [Shadcn UI](https://ui.shadcn.com/).
-It includes a basic setup for routing, state management, theming, testing and linting.
+- Editorial home page with full-bleed hero, service overview, founder trust slice, process, gallery teaser, and CTA sections
+- Services index and per-capability detail pages
+- Gallery index and theme detail pages with lightbox interaction
+- About Julian page using the production portrait asset
+- Contact page plus global `Jetzt buchen` contact panel
+- Mobile navigation and scrollable side panels for short viewports
+- Beige and dark themes with a hidden footer-edge theme switch
+- Impressum, Datenschutz, and 404 routes
+- Vitest route/theme/contact regression tests
 
-## Features
+## Tech Stack
 
-- Vite
+- React 19
 - TypeScript
-- Shadcn UI
-- ESLint and Prettier for code quality
-- Routing with `react-router` HashRouter (used because gh-pages doesn't support browser routers)
-- State management with Redux Toolkit
-- Pre-commit hooks with Husky
-- Vitest for testing
+- Vite
+- React Router `HashRouter`
+- Tailwind CSS v4
+- shadcn/Radix primitives
+- Redux Toolkit
+- motion
+- Vitest and Testing Library
+- pnpm
 
-## Hosting on gh-pages
+## Getting Started
 
-This template is configured to auto deploy to gh-pages.
-Therefore it includes a `pages.yml` file that autodeploys the main branch to gh-pages.
+Install dependencies:
 
-If you don't have a custom url, replace the `base` in `vite.config.ts` with your project name.
-If you want to host this with a custom url, remove `base` from `vite.config.ts`.
-
-File: `vite.config.ts`
-
-```ts
-export default defineConfig({
-  //...
-  base: '/github-repo-name/',
-});
+```bash
+pnpm install
 ```
 
-## What to replace
+Run the development server:
 
-- replace all occurences of `vite-shadcn` with your project name
+```bash
+pnpm dev
+```
 
-## Don't forget to
+Run the verification suite:
 
-- `pnpm run prepare` to setup pre-commit hooks
+```bash
+pnpm test
+pnpm typecheck
+pnpm build
+pnpm lint
+```
+
+Preview a production build:
+
+```bash
+pnpm build
+pnpm preview
+```
+
+## Project Structure
+
+```text
+src/components/   Shared editorial UI components and primitives
+src/content/      Static content modules for services, gallery, founder, contact, nav, process
+src/context/      Theme provider and theme context
+src/pages/        Route-level page compositions
+src/routes/       Router setup
+src/store/        Redux store and global UI state
+tests/            Vitest setup, mocks, and route smoke tests
+public/images/    Static image assets, including Julian's portrait
+```
+
+## Contact Links
+
+Production contact links are centralized in `src/content/contact.ts`:
+
+- WhatsApp: `https://wa.me/4917621384822`
+- Telephone: `tel:+4917621384822`
+- Instagram: `https://www.instagram.com/up_socialbyjf?igsh=MW5taTRud2loaWZybw==`
+- E-Mail: `mailto:info@up-social.de`
+
+Update that module first if contact data changes, then run the tests because `tests/App.test.tsx` guards these hrefs.
+
+## Design Notes
+
+The completed design flow established an Editorial Minimal direction: photography first, generous spacing, restrained motion, muted beige/dark themes, and a single direct-contact conversion path.
+Durable implementation rules from that flow live in `CLAUDE.md`; transient `.design` artifacts were removed after completion.
+
+Key constraints to preserve:
+
+- Do not add pricing/package tables unless the product strategy changes.
+- Do not reintroduce generic shadcn/template visuals without adapting them to the editorial system.
+- Do not add visible theme controls outside the footer-edge switch.
+- Keep non-home nav in normal document flow.
+- Keep mobile nav and contact side panels scrollable on short screens.
+- Respect reduced-motion preferences.
+
+## Deployment Notes
+
+The app currently uses `HashRouter` for static-hosting compatibility.
+Move to `BrowserRouter` only if the production host supports SPA rewrites.
+
+Before launch, final legal data still needs review:
+
+- Street address and postal address
+- USt-ID if applicable
+- Hosting provider and retention details
+- Analytics provider details if analytics are enabled
+- Final lawyer-reviewed Impressum and Datenschutz copy

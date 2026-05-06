@@ -19,7 +19,7 @@ export function Nav() {
         'z-50 w-full px-4 py-4 sm:px-7 lg:px-10',
         isHome
           ? 'absolute left-0 top-0 text-[var(--paper)]'
-          : 'sticky top-0 border-b border-border bg-background/92 text-foreground backdrop-blur'
+          : 'relative border-b border-border bg-background/92 text-foreground backdrop-blur'
       )}
     >
       <nav className='flex items-center justify-between gap-6' aria-label='Hauptnavigation'>

@@ -28,8 +28,7 @@ const motionElements = {
 
 function getContainerVariants(delay: number, staggerChildren: number, y: number): Variants {
   return {
-    hidden: {
-      opacity: 0,
+    initial: {
       y,
     },
     visible: {
@@ -65,7 +64,7 @@ export function MotionInView({
 
   return (
     <Component
-      initial='hidden'
+      initial='initial'
       viewport={{ once: true, amount }}
       whileInView='visible'
       variants={getContainerVariants(delay, staggerChildren, y)}

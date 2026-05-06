@@ -7,6 +7,7 @@ export type GalleryTheme = {
   slug: string;
   name: string;
   folder: string;
+  filePrefix: string;
   description: string;
   cover: ImageVariantSet;
   count: number;
@@ -24,6 +25,7 @@ export const galleryThemes: GalleryTheme[] = [
     slug: 'food',
     name: 'Food',
     folder: 'Food',
+    filePrefix: 'food',
     description: 'Food-Motive für Restaurants, Cafes und Produktkommunikation.',
     cover: imageSet('Food', 'food-23', 'Food-Fotografie mit ruhiger editorialer Stimmung'),
     count: 38,
@@ -32,6 +34,7 @@ export const galleryThemes: GalleryTheme[] = [
     slug: 'events',
     name: 'Events',
     folder: 'Loaction',
+    filePrefix: 'loaction',
     description: 'Atmosphäre, Räume und Begegnungen aus echten Situationen.',
     cover: imageSet('Loaction', 'loaction-10', 'Event- und Location-Fotografie'),
     count: 21,
@@ -40,6 +43,7 @@ export const galleryThemes: GalleryTheme[] = [
     slug: 'people',
     name: 'People',
     folder: 'People',
+    filePrefix: 'people',
     description: 'Portraits und Menschen als nahbarer Markenanker.',
     cover: imageSet('People', 'people-20', 'Editoriales Portrait einer Person'),
     count: 22,
@@ -48,6 +52,7 @@ export const galleryThemes: GalleryTheme[] = [
     slug: 'nature',
     name: 'Nature',
     folder: 'Nature',
+    filePrefix: 'nature',
     description: 'Natürliche Bildwelten mit Ruhe, Tiefe und Textur.',
     cover: imageSet('Nature', 'nature-23', 'Naturfotografie als ruhiger Markenraum'),
     count: 45,
@@ -56,11 +61,22 @@ export const galleryThemes: GalleryTheme[] = [
     slug: 'industrial',
     name: 'Industrial',
     folder: 'Random',
+    filePrefix: 'random',
     description: 'Strukturen, Materialität und Arbeitsumfelder.',
     cover: imageSet('Random', 'random-9', 'Strukturelle Industrie- und Detailfotografie'),
     count: 13,
   },
 ];
+
+export function getThemeImages(theme: GalleryTheme): ImageVariantSet[] {
+  return Array.from({ length: theme.count }, (_, index) => {
+    const id = index + 1;
+    return {
+      base: `/images/${theme.folder}/${theme.filePrefix}-${id}/${theme.filePrefix}-${id}`,
+      alt: `${theme.name} — Bild ${id}`,
+    };
+  });
+}
 
 export const gallerySlugs = galleryThemes.map((theme) => theme.slug);
 

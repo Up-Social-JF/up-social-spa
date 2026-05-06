@@ -1,13 +1,13 @@
 import { HashRouter as Router, Navigate, Route, Routes as RouterRoutes } from 'react-router';
 import { AppLayout } from '@/components/layout/app-layout';
+import { AboutPage } from '@/pages/about-page';
+import { CapabilityDetailPage } from '@/pages/capability-detail-page';
+import { GaleriePage } from '@/pages/galerie-page';
+import { GalerieThemePage } from '@/pages/galerie-theme-page';
+import { KontaktPage } from '@/pages/kontakt-page';
+import { LeistungenPage } from '@/pages/leistungen-page';
 import { Main } from '@/pages/main';
-import {
-  CapabilityDetailPlaceholder,
-  GalleryThemePlaceholder,
-  LegalPlaceholder,
-  NotFoundPage,
-  PlaceholderPage,
-} from '@/pages/placeholders';
+import { LegalPlaceholder, NotFoundPage, PlaceholderPage } from '@/pages/placeholders';
 import { pageIntros } from '@/content/site';
 
 export const Routes = () => {
@@ -16,12 +16,12 @@ export const Routes = () => {
       <RouterRoutes>
         <Route element={<AppLayout />}>
           <Route path='/' element={<Main />} />
-          <Route path='/leistungen' element={<PlaceholderPage {...pageIntros.leistungen} />} />
-          <Route path='/leistungen/:slug' element={<CapabilityDetailPlaceholder />} />
-          <Route path='/galerie' element={<PlaceholderPage {...pageIntros.galerie} />} />
-          <Route path='/galerie/:theme' element={<GalleryThemePlaceholder />} />
-          <Route path='/ueber-jf' element={<PlaceholderPage {...pageIntros.about} />} />
-          <Route path='/kontakt' element={<PlaceholderPage {...pageIntros.kontakt} />} />
+          <Route path='/leistungen' element={<LeistungenPage />} />
+          <Route path='/leistungen/:slug' element={<CapabilityDetailPage />} />
+          <Route path='/galerie' element={<GaleriePage />} />
+          <Route path='/galerie/:theme' element={<GalerieThemePage />} />
+          <Route path='/ueber-jf' element={<AboutPage />} />
+          <Route path='/kontakt' element={<KontaktPage />} />
           <Route path='/impressum' element={<LegalPlaceholder type='Impressum' />} />
           <Route path='/datenschutz' element={<LegalPlaceholder type='Datenschutz' />} />
           <Route path='/404' element={<NotFoundPage />} />

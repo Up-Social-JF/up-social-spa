@@ -9,10 +9,10 @@ export function Footer() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <footer className='bg-background px-5 py-10 text-foreground sm:px-8 lg:px-10'>
+    <footer className='relative overflow-hidden bg-background px-5 py-10 text-foreground sm:px-8 lg:px-10'>
       <div className='mx-auto grid max-w-[var(--max-width-page)] gap-10 md:grid-cols-[1.3fr_1fr_1fr]'>
         <div>
-          <LogoWide className='h-12 w-[18.2rem] text-foreground' />
+          <LogoWide className='w-64 max-w-full text-foreground [--logo-accent:var(--accent)] sm:w-72' />
           <p className='mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground'>
             {site.claim}
           </p>
@@ -47,15 +47,16 @@ export function Footer() {
             </Link>
           ))}
         </div>
-        <button
-          type='button'
-          aria-label='Theme wechseln'
-          onClick={() => setTheme(theme === 'beige' ? 'dark' : 'beige')}
-          className='group -m-2 flex size-6 items-center justify-center'
-        >
-          <span className='size-1.5 rounded-full bg-muted-foreground/35 transition-colors group-hover:bg-[var(--accent)]' />
-        </button>
       </div>
+      <button
+        type='button'
+        aria-label='Theme wechseln'
+        onClick={() => setTheme(theme === 'beige' ? 'dark' : 'beige')}
+        className='group absolute -right-10 bottom-8 size-20 rounded-full border border-border bg-[var(--color-bg-tertiary)] transition-transform duration-200 ease-editorial hover:-translate-x-2 focus-visible:-translate-x-8 sm:-right-12 sm:size-24'
+      >
+        <span className='sr-only'>Theme wechseln</span>
+        <span className='absolute left-5 top-1/2 size-2 -translate-y-1/2 rounded-full bg-[var(--accent)] opacity-70 transition-opacity group-hover:opacity-100' />
+      </button>
     </footer>
   );
 }

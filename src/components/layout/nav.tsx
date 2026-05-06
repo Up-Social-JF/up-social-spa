@@ -22,8 +22,10 @@ export function Nav() {
         <Link to='/' aria-label='UpSocial by JF Startseite' className='block shrink-0'>
           <LogoWide
             className={cn(
-              'h-9 w-[13.65rem] sm:h-14 sm:w-[21.25rem]',
-              isHome ? 'text-[var(--paper)]' : 'text-foreground'
+              'w-40 sm:w-60',
+              isHome
+                ? 'text-[var(--paper)] [--logo-accent:var(--accent)]'
+                : 'text-foreground [--logo-accent:var(--accent)]'
             )}
           />
         </Link>

@@ -21,11 +21,10 @@ export function Nav() {
       <nav className='flex items-center justify-between gap-6' aria-label='Hauptnavigation'>
         <Link to='/' aria-label='UpSocial by JF Startseite' className='block shrink-0'>
           <LogoWide
+            accent='var(--accent)'
             className={cn(
-              'w-40 sm:w-60',
-              isHome
-                ? 'text-[var(--paper)] [--logo-accent:var(--accent)]'
-                : 'text-foreground [--logo-accent:var(--accent)]'
+              'w-44 sm:w-64 lg:w-72',
+              isHome ? 'text-[var(--paper)]' : 'text-foreground'
             )}
           />
         </Link>

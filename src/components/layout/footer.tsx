@@ -12,7 +12,7 @@ export function Footer() {
     <footer className='relative overflow-hidden bg-background px-5 py-10 text-foreground sm:px-8 lg:px-10'>
       <div className='mx-auto grid max-w-[var(--max-width-page)] gap-10 md:grid-cols-[1.3fr_1fr_1fr]'>
         <div>
-          <LogoWide className='w-64 max-w-full text-foreground [--logo-accent:var(--accent)] sm:w-72' />
+          <LogoWide accent='var(--accent)' className='w-44 max-w-full text-foreground sm:w-56' />
           <p className='mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground'>
             {site.claim}
           </p>

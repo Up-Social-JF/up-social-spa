@@ -62,18 +62,16 @@ export function ProcessSection({
           staggerChildren={0.1}
           className='grid list-none grid-cols-1 gap-10 md:grid-cols-3 md:gap-8'
         >
-          {steps.map((step, index) => (
+          {steps.map((step) => (
             <motion.li
               key={step.number}
               variants={stepVariants}
               className='relative flex flex-col gap-4 border-t border-border pt-6'
             >
-              {index < steps.length - 1 ? (
-                <span
-                  aria-hidden='true'
-                  className='pointer-events-none absolute right-0 top-0 hidden h-px w-8 -translate-y-px bg-[var(--accent-readable)] md:block'
-                />
-              ) : null}
+              <span
+                aria-hidden='true'
+                className='pointer-events-none absolute right-0 top-0 hidden h-px w-8 -translate-y-px bg-[var(--accent-readable)] md:block'
+              />
               <span
                 aria-hidden='true'
                 className='font-display text-5xl font-light leading-none tracking-[-0.04em] text-[var(--accent-readable)] sm:text-6xl'

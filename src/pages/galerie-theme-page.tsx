@@ -1,36 +1,11 @@
 import { useMemo, useState } from 'react';
-import { motion, type Variants } from 'motion/react';
 import { Navigate, useParams } from 'react-router';
 import { CTABanner } from '@/components/layout/cta-banner';
 import { GalleryTile } from '@/components/gallery-tile';
+import { GalleryFilmStrip } from '@/components/gallery-film-strip';
 import { Lightbox } from '@/components/lightbox';
 import { MotionInView } from '@/components/motion/motion-in-view';
-import {
-  galleryThemes,
-  getGalleryThemeBySlug,
-  getImageSrc,
-  getImageSrcSet,
-  getThemeImages,
-} from '@/content/gallery';
-
-const tileVariants: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: [0.65, 0, 0.35, 1] },
-  },
-};
-
-const masonrySpan = (index: number) => {
-  // Editorial masonry feel: cycle aspect ratios so the grid breaks into a varied rhythm.
-  const cycle = index % 7;
-  if (cycle === 0) return 'aspect-[3/4] sm:row-span-2 sm:aspect-[3/5]';
-  if (cycle === 1) return 'aspect-[4/3]';
-  if (cycle === 3) return 'aspect-[1/1]';
-  if (cycle === 5) return 'aspect-[4/5] sm:row-span-2 sm:aspect-[4/6]';
-  return 'aspect-[4/5]';
-};
+import { galleryThemes, getGalleryThemeBySlug, getThemeImages } from '@/content/gallery';
 
 export function GalerieThemePage() {
   const { theme: themeSlug } = useParams();
@@ -66,32 +41,9 @@ export function GalerieThemePage() {
 
       <section
         aria-label={`${theme.name} Bilder`}
-        className='bg-background px-5 pb-20 sm:px-8 sm:pb-24 lg:px-10 lg:pb-28'
+        className='bg-background pb-20 sm:pb-24 lg:pb-28'
       >
-        <ul className='mx-auto grid max-w-[var(--max-width-page)] list-none auto-rows-[14rem] grid-cols-1 gap-3 sm:auto-rows-[16rem] sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-5'>
-          {images.map((image, index) => (
-            <motion.li key={image.base} variants={tileVariants} className={masonrySpan(index)}>
-              <button
-                type='button'
-                onClick={() => setLightboxIndex(index)}
-                aria-label={`${image.alt} — vergrößern`}
-                className='group block h-full w-full overflow-hidden bg-[var(--color-bg-secondary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-border-focus)] focus-visible:outline-offset-2'
-              >
-                <picture>
-                  <source srcSet={getImageSrcSet(image, 'avif')} type='image/avif' />
-                  <source srcSet={getImageSrcSet(image, 'webp')} type='image/webp' />
-                  <img
-                    src={getImageSrc(image, 'md')}
-                    alt={image.alt}
-                    loading='lazy'
-                    decoding='async'
-                    className='h-full w-full object-cover object-center transition-transform duration-700 ease-editorial group-hover:scale-[1.04]'
-                  />
-                </picture>
-              </button>
-            </motion.li>
-          ))}
-        </ul>
+        <GalleryFilmStrip images={images} themeName={theme.name} onImageClick={setLightboxIndex} />
       </section>
 
       <section

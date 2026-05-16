@@ -45,7 +45,7 @@ export const galleryThemes: GalleryTheme[] = [
     folder: 'People',
     filePrefix: 'people',
     description: 'Portraits und Menschen als nahbarer Markenanker.',
-    cover: imageSet('People', 'people-20', 'Editoriales Portrait einer Person'),
+    cover: imageSet('People', 'people-1', 'Editoriales Portrait einer Person'),
     count: 22,
   },
   {

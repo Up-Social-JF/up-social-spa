@@ -19,7 +19,7 @@ export function CapabilityCard({ capability, className }: CapabilityCardProps) {
         className
       )}
     >
-      <div className='flex items-baseline justify-between gap-4'>
+      <div className='flex items-start justify-between gap-4'>
         <span
           aria-hidden='true'
           className='font-display text-5xl font-light leading-none tracking-[-0.04em] text-[var(--accent-readable)] sm:text-6xl'

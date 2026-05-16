@@ -117,8 +117,16 @@ export function HomeHero() {
         </div>
       </motion.div>
 
-      <motion.a
-        href='#leistungen'
+      <motion.button
+        type='button'
+        onClick={() => {
+          const target = document.getElementById('leistungen');
+          if (!target) return;
+          target.scrollIntoView({
+            behavior: shouldReduceMotion ? 'auto' : 'smooth',
+            block: 'start',
+          });
+        }}
         aria-label='Zum nächsten Abschnitt scrollen'
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -134,7 +142,7 @@ export function HomeHero() {
         >
           <ArrowDown className='size-4' />
         </motion.span>
-      </motion.a>
+      </motion.button>
     </section>
   );
 }

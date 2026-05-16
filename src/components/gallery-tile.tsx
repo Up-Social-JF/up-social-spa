@@ -13,6 +13,11 @@ const aspectClass = {
   editorial: 'aspect-[3/4] md:aspect-[4/5]',
 } as const;
 
+const titleClass = {
+  compact: 'text-lg sm:text-xl lg:text-2xl',
+  editorial: 'text-2xl sm:text-3xl lg:text-4xl',
+} as const;
+
 export function GalleryTile({ theme, size = 'compact', className }: GalleryTileProps) {
   return (
     <Link
@@ -44,9 +49,11 @@ export function GalleryTile({ theme, size = 'compact', className }: GalleryTileP
         <span className='absolute right-3 top-3 inline-flex items-center bg-[var(--paper)]/92 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--ink)] backdrop-blur sm:right-4 sm:top-4'>
           {theme.count} Bilder
         </span>
-        <figcaption className='absolute inset-x-4 bottom-4 flex items-end justify-between gap-3 text-[var(--paper)] sm:inset-x-6 sm:bottom-6'>
-          <span className='font-display text-2xl font-light tracking-[-0.025em] sm:text-3xl lg:text-4xl'>
-            <span className='relative inline-block'>
+        <figcaption className='absolute inset-x-4 bottom-4 flex min-w-0 items-end justify-between gap-3 text-[var(--paper)] sm:inset-x-6 sm:bottom-6'>
+          <span
+            className={cn('min-w-0 font-display font-light tracking-[-0.025em]', titleClass[size])}
+          >
+            <span className='relative inline-block max-w-full'>
               {theme.name}
               <span
                 aria-hidden='true'

@@ -11,5 +11,5 @@ export const founder = {
   ],
   ctaLabel: 'Lerne Julian kennen',
   ctaHref: '/ueber-jf',
-  portrait: '/images/julian.jpg',
+  portrait: '/images/People/people-45/people-45-xl.jpg',
 };

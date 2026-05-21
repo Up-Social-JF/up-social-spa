@@ -2,7 +2,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { motion, type Variants } from 'motion/react';
 import { Link } from 'react-router';
 import { MotionInView } from '@/components/motion/motion-in-view';
-import { galleryThemes, getImageSrc, getImageSrcSet } from '@/content/gallery';
+import { galleryThemes, getImageSrc, getImageSrcSet, getThemeCount } from '@/content/gallery';
 import { cn } from '@/utils/cn';
 
 type GalleryTeaserProps = {
@@ -27,7 +27,7 @@ export function GalleryTeaser({
   id,
   eyebrow = 'Galerie',
   title = 'Letzte Arbeiten.',
-  description = 'Fünf Bildwelten, die zeigen, wie Marken bei uns aussehen.',
+  description = 'Drei Bildwelten, die zeigen, wie Marken bei uns aussehen.',
 }: GalleryTeaserProps) {
   return (
     <section
@@ -75,7 +75,7 @@ export function GalleryTeaser({
           as='ul'
           amount={0.15}
           staggerChildren={0.08}
-          className='grid list-none grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5'
+          className='grid list-none grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4'
         >
           {galleryThemes.map((theme) => (
             <motion.li key={theme.slug} variants={tileVariants} className='group'>
@@ -107,7 +107,7 @@ export function GalleryTeaser({
                       {theme.name}
                     </span>
                     <span className='text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--paper)]/75'>
-                      {theme.count} Bilder
+                      {getThemeCount(theme)} Bilder
                     </span>
                   </figcaption>
                 </figure>

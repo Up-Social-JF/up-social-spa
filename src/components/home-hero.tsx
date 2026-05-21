@@ -2,12 +2,10 @@ import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { motion, useReducedMotion, useScroll, useTransform, type Variants } from 'motion/react';
 import { Link } from 'react-router';
 import { Button } from '@/components/ui/button';
-import { galleryThemes, getImageSrc, getImageSrcSet } from '@/content/gallery';
+import { getImageSrc, getImageSrcSet, heroImage } from '@/content/gallery';
 import { site } from '@/content/site';
 import { actions as contactPanelActions } from '@/store/slices/contact-panel-slice';
 import { useAppDispatch } from '@/store/store';
-
-const heroImage = galleryThemes.find((theme) => theme.slug === 'nature')!.cover;
 
 const heroStagger: Variants = {
   hidden: {},
@@ -48,7 +46,7 @@ export function HomeHero() {
           <source srcSet={getImageSrcSet(heroImage, 'avif')} type='image/avif' />
           <source srcSet={getImageSrcSet(heroImage, 'webp')} type='image/webp' />
           <img
-            src={getImageSrc(heroImage, 'xl')}
+            src={getImageSrc(heroImage, '4k')}
             alt=''
             fetchPriority='high'
             decoding='async'

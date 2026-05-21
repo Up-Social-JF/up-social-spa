@@ -32,7 +32,7 @@ export function GaleriePage() {
           as='ul'
           amount={0.1}
           staggerChildren={0.1}
-          className='mx-auto grid max-w-[var(--max-width-page)] list-none grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 lg:gap-12'
+          className='mx-auto grid max-w-[var(--max-width-page)] list-none grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-12'
         >
           {galleryThemes.map((theme) => (
             <motion.li key={theme.slug} variants={tileVariants}>

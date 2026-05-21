@@ -18,7 +18,7 @@ export const pageIntros = {
   galerie: {
     eyebrow: 'Galerie',
     title: 'Die Bilder hinter der Marke.',
-    description: 'Food, Events, People, Nature und Industrial als ruhige Themenwelten.',
+    description: 'Nature, People und Zum Goldenen Kalb als ruhige Themenwelten.',
   },
   about: {
     eyebrow: 'Über JF',

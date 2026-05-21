@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { type GalleryTheme, getImageSrc, getImageSrcSet } from '@/content/gallery';
+import { type GalleryTheme, getImageSrc, getImageSrcSet, getThemeCount } from '@/content/gallery';
 import { cn } from '@/utils/cn';
 
 type GalleryTileProps = {
@@ -47,7 +47,7 @@ export function GalleryTile({ theme, size = 'compact', className }: GalleryTileP
           className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_50%,rgb(10_10_10_/_60%)_100%)] opacity-90 transition-opacity duration-300 group-hover:opacity-100'
         />
         <span className='absolute right-3 top-3 inline-flex items-center bg-[var(--paper)]/92 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--ink)] backdrop-blur sm:right-4 sm:top-4'>
-          {theme.count} Bilder
+          {getThemeCount(theme)} Bilder
         </span>
         <figcaption className='absolute inset-x-4 bottom-4 flex min-w-0 items-end justify-between gap-3 text-[var(--paper)] sm:inset-x-6 sm:bottom-6'>
           <span

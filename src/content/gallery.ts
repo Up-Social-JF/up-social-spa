@@ -10,7 +10,7 @@ export type GalleryTheme = {
   filePrefix: string;
   description: string;
   cover: ImageVariantSet;
-  count: number;
+  ids: number[];
 };
 
 function imageSet(folder: string, name: string, alt: string): ImageVariantSet {
@@ -20,24 +20,32 @@ function imageSet(folder: string, name: string, alt: string): ImageVariantSet {
   };
 }
 
+const naturIds = [7, 2, 11, 4, 9, 1, 12, 6, 8, 3, 10, 5];
+
+const peopleIds = [
+  22, 3, 38, 13, 28, 9, 41, 17, 31, 4, 25, 44, 36, 1, 18, 42, 8, 33, 15, 21, 39, 2, 12, 37, 54, 16,
+  32, 26, 43, 34, 40,
+];
+
+const zgkIds = [
+  14, 3, 22, 8, 17, 25, 1, 11, 19, 5, 27, 13, 9, 21, 4, 16, 23, 7, 20, 12, 2, 18, 26, 10, 24, 6, 15,
+];
+
+export const heroImage: ImageVariantSet = imageSet(
+  'Natur',
+  'natur-5',
+  'Naturfotografie als ruhiger Markenraum'
+);
+
 export const galleryThemes: GalleryTheme[] = [
   {
-    slug: 'food',
-    name: 'Food',
-    folder: 'Food',
-    filePrefix: 'food',
-    description: 'Food-Motive für Restaurants, Cafes und Produktkommunikation.',
-    cover: imageSet('Food', 'food-23', 'Food-Fotografie mit ruhiger editorialer Stimmung'),
-    count: 38,
-  },
-  {
-    slug: 'events',
-    name: 'Events',
-    folder: 'Loaction',
-    filePrefix: 'loaction',
-    description: 'Atmosphäre, Räume und Begegnungen aus echten Situationen.',
-    cover: imageSet('Loaction', 'loaction-10', 'Event- und Location-Fotografie'),
-    count: 21,
+    slug: 'nature',
+    name: 'Nature',
+    folder: 'Natur',
+    filePrefix: 'natur',
+    description: 'Natürliche Bildwelten mit Ruhe, Tiefe und Textur.',
+    cover: imageSet('Natur', 'natur-5', 'Naturfotografie als ruhiger Markenraum'),
+    ids: naturIds,
   },
   {
     slug: 'people',
@@ -45,37 +53,29 @@ export const galleryThemes: GalleryTheme[] = [
     folder: 'People',
     filePrefix: 'people',
     description: 'Portraits und Menschen als nahbarer Markenanker.',
-    cover: imageSet('People', 'people-1', 'Editoriales Portrait einer Person'),
-    count: 22,
+    cover: imageSet('People', 'people-22', 'Editoriales Portrait einer Person'),
+    ids: peopleIds,
   },
   {
-    slug: 'nature',
-    name: 'Nature',
-    folder: 'Nature',
-    filePrefix: 'nature',
-    description: 'Natürliche Bildwelten mit Ruhe, Tiefe und Textur.',
-    cover: imageSet('Nature', 'nature-23', 'Naturfotografie als ruhiger Markenraum'),
-    count: 45,
-  },
-  {
-    slug: 'industrial',
-    name: 'Industrial',
-    folder: 'Random',
-    filePrefix: 'random',
-    description: 'Strukturen, Materialität und Arbeitsumfelder.',
-    cover: imageSet('Random', 'random-9', 'Strukturelle Industrie- und Detailfotografie'),
-    count: 13,
+    slug: 'zgk',
+    name: 'Zum Goldenen Kalb',
+    folder: 'ZGK',
+    filePrefix: 'zgk',
+    description: 'Atmosphäre, Räume und Begegnungen aus dem Zum Goldenen Kalb.',
+    cover: imageSet('ZGK', 'zgk-1', 'Zum Goldenen Kalb — Atmosphäre und Räume'),
+    ids: zgkIds,
   },
 ];
 
 export function getThemeImages(theme: GalleryTheme): ImageVariantSet[] {
-  return Array.from({ length: theme.count }, (_, index) => {
-    const id = index + 1;
-    return {
-      base: `/images/${theme.folder}/${theme.filePrefix}-${id}/${theme.filePrefix}-${id}`,
-      alt: `${theme.name} — Bild ${id}`,
-    };
-  });
+  return theme.ids.map((id) => ({
+    base: `/images/${theme.folder}/${theme.filePrefix}-${id}/${theme.filePrefix}-${id}`,
+    alt: `${theme.name} — Bild ${id}`,
+  }));
+}
+
+export function getThemeCount(theme: GalleryTheme): number {
+  return theme.ids.length;
 }
 
 export const gallerySlugs = galleryThemes.map((theme) => theme.slug);

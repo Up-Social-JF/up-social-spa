@@ -5,7 +5,12 @@ import { GalleryTile } from '@/components/gallery-tile';
 import { GalleryFilmStrip } from '@/components/gallery-film-strip';
 import { Lightbox } from '@/components/lightbox';
 import { MotionInView } from '@/components/motion/motion-in-view';
-import { galleryThemes, getGalleryThemeBySlug, getThemeImages } from '@/content/gallery';
+import {
+  galleryThemes,
+  getGalleryThemeBySlug,
+  getThemeCount,
+  getThemeImages,
+} from '@/content/gallery';
 
 export function GalerieThemePage() {
   const { theme: themeSlug } = useParams();
@@ -28,7 +33,7 @@ export function GalerieThemePage() {
       >
         <div className='mx-auto grid max-w-[var(--max-width-page)] gap-5'>
           <p className='text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground'>
-            Galerie · {theme.count} Bilder
+            Galerie · {getThemeCount(theme)} Bilder
           </p>
           <h1 className='max-w-5xl text-[clamp(3rem,9vw,7rem)] font-light leading-[0.94] tracking-[-0.05em] text-balance text-[var(--accent-readable)]'>
             {theme.name}
@@ -62,7 +67,7 @@ export function GalerieThemePage() {
               Mehr aus der Galerie.
             </h2>
           </header>
-          <ul className='grid list-none grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4'>
+          <ul className='grid list-none grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4'>
             {otherThemes.map((other) => (
               <li key={other.slug}>
                 <GalleryTile theme={other} size='compact' />

@@ -34,7 +34,7 @@ export function Footer() {
           {contactChannels.slice(0, 3).map((channel) => (
             <span key={channel.label}>{channel.label}</span>
           ))}
-          <span>Aus München. Für ganz DACH.</span>
+          <span>Aus München. Für ganz Bayern.</span>
         </div>
       </div>
 

@@ -8,6 +8,14 @@ export type GalleryPost = {
   images: ImageVariantSet[];
 };
 
+/** An external video link shown as the leading tile in a theme's film strip. */
+export type GalleryVideo = {
+  href: string;
+  label: string;
+  /** Optional poster still; falls back to a graphic tile when omitted. */
+  poster?: ImageVariantSet;
+};
+
 export type GalleryTheme = {
   slug: string;
   name: string;
@@ -16,6 +24,8 @@ export type GalleryTheme = {
   posts: GalleryPost[];
   /** CSS aspect-ratio for film-strip tiles, e.g. '16/9'. Defaults to '3/4'. */
   tileAspect?: string;
+  /** Optional leading video tile (e.g. a customer testimonial). */
+  video?: GalleryVideo;
 };
 
 function img(folder: string, name: string, alt: string): ImageVariantSet {
@@ -74,6 +84,10 @@ const herefordPost: GalleryPost = {
   ],
 };
 
+// ─── KFO-Praxis ───────────────────────────────────────────────────────────
+
+const KFO = 'KFO-Praxis';
+
 // ─── Galleries ──────────────────────────────────────────────────────────────
 
 export const galleryThemes: GalleryTheme[] = [
@@ -107,6 +121,18 @@ export const galleryThemes: GalleryTheme[] = [
     description: 'Live-Momente, Stimmung und echte Begegnungen auf Events.',
     cover: img('EVENTS', 'events-6N', 'Events — Stimmung und Begegnungen'),
     posts: (['1N', '2N', '3N', '4N', '6N'] as const).map((id) => single('EVENTS', 'events', id)),
+  },
+  {
+    slug: 'praxen',
+    name: 'Praxen',
+    description: 'Räume, Team und Atmosphäre aus der kieferorthopädischen Praxis.',
+    cover: img(KFO, 'kfo-1', 'Praxen — kieferorthopädische Praxis'),
+    posts: [2, 3, 4, 5, 6].map((id) => single(KFO, 'kfo', id)),
+    video: {
+      href: 'https://www.youtube.com/@UpSocialProduction',
+      label: 'Video: Dr. Udo Windsheimer',
+      poster: img(KFO, 'kfo-2', 'Video mit Dr. Udo Windsheimer'),
+    },
   },
 ];
 

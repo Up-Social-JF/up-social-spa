@@ -41,20 +41,12 @@ export const capabilities: Capability[] = [
     description: 'Websites, die Bildsprache, Positionierung und Kontaktaufnahme verbinden.',
   },
   {
-    slug: 'seo-analytics',
+    slug: 'videographie',
     number: '05',
-    name: 'SEO & Analytics',
-    subtitle: 'Gefunden werden, ohne lauter zu werden.',
-    bullets: ['Local SEO', 'Technical Basics', 'Umami', 'Reporting'],
-    description: 'Messbarkeit und Auffindbarkeit als ruhige Grundlage für Wachstum.',
-  },
-  {
-    slug: 'ecommerce-crm',
-    number: '06',
-    name: 'E-Commerce & CRM',
-    subtitle: 'Shop und Kundendaten sauber verbunden.',
-    bullets: ['Shop Setup', 'Product Content', 'Email Flows', 'CRM Basics'],
-    description: 'Produkt, Shop und Kontaktpflege werden als ein System gedacht.',
+    name: 'Videographie',
+    subtitle: 'Mein Auge, euer Produkt.',
+    bullets: ['Brand Films', 'Reels & Shorts', 'Events', 'Product Videos'],
+    description: 'Bewegtbild, das die Identität einer Marke greifbar macht — nicht nur zeigt.',
   },
 ];
 

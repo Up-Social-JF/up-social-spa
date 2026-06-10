@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getImageSrc, getImageSrcSet, type ImageVariantSet } from '@/content/gallery';
+import { ImageWatermark } from '@/components/image-watermark';
 
 type GalleryFilmStripProps = {
   images: ImageVariantSet[];
@@ -7,15 +8,7 @@ type GalleryFilmStripProps = {
   themeName: string;
 };
 
-const ASPECT_CYCLE: ReadonlyArray<readonly [number, number]> = [
-  [3, 4],
-  [4, 3],
-  [3, 4],
-  [4, 5],
-  [1, 1],
-  [3, 4],
-  [4, 3],
-];
+const FILM_STRIP_ASPECT_RATIO: readonly [number, number] = [3, 4];
 
 const DRAG_THRESHOLD_PX = 8;
 
@@ -136,7 +129,7 @@ export function GalleryFilmStrip({ images, onImageClick, themeName }: GalleryFil
         style={{ scrollBehavior: 'auto' }}
       >
         {images.map((image, i) => {
-          const [aw, ah] = ASPECT_CYCLE[i % ASPECT_CYCLE.length];
+          const [aw, ah] = FILM_STRIP_ASPECT_RATIO;
           return (
             <button
               key={image.base}
@@ -164,7 +157,7 @@ export function GalleryFilmStrip({ images, onImageClick, themeName }: GalleryFil
                   loading={i < 3 ? 'eager' : 'lazy'}
                   fetchPriority={i < 3 ? 'high' : 'auto'}
                   decoding='async'
-                  className='pointer-events-none h-full w-full object-cover object-center transition-transform duration-[1100ms] ease-editorial group-hover:scale-[1.025]'
+                  className='pointer-events-none h-full w-full object-contain object-center transition-transform duration-700 ease-editorial group-hover:scale-[1.1]'
                 />
               </picture>
               <span
@@ -173,6 +166,7 @@ export function GalleryFilmStrip({ images, onImageClick, themeName }: GalleryFil
               >
                 {pad2(i + 1)}
               </span>
+              <ImageWatermark size='md' />
             </button>
           );
         })}

@@ -115,16 +115,37 @@ export function Lightbox({ images, index, onIndexChange, themeName }: LightboxPr
             </button>
 
             {current ? (
-              <picture className='flex max-h-full max-w-full items-center justify-center'>
-                <source srcSet={getImageSrcSet(current, 'avif')} type='image/avif' />
-                <source srcSet={getImageSrcSet(current, 'webp')} type='image/webp' />
-                <img
-                  key={current.base}
-                  src={getImageSrc(current, 'xl')}
-                  alt={current.alt}
-                  className='max-h-[78vh] max-w-full object-contain'
-                />
-              </picture>
+              <div className='relative flex h-[min(78vh,820px)] w-[min(92vw,1200px)] items-center justify-center overflow-hidden'>
+                <picture className='flex h-full w-full items-center justify-center'>
+                  <source
+                    srcSet={getImageSrcSet(current, 'avif')}
+                    sizes='100vw'
+                    type='image/avif'
+                  />
+                  <source
+                    srcSet={getImageSrcSet(current, 'webp')}
+                    sizes='100vw'
+                    type='image/webp'
+                  />
+                  <img
+                    key={current.base}
+                    src={getImageSrc(current, '4k')}
+                    alt={current.alt}
+                    loading='eager'
+                    fetchPriority='high'
+                    decoding='async'
+                    className='h-full w-full object-contain'
+                  />
+                </picture>
+                <div
+                  aria-hidden='true'
+                  className='pointer-events-none absolute inset-0 flex items-center justify-center'
+                >
+                  <span className='rounded-md bg-black/28 px-5 py-3 text-center font-display text-[clamp(1.4rem,5vw,3.8rem)] uppercase tracking-[0.46em] text-white/55 shadow-[0_0_0_1px_rgba(255,255,255,0.22)]'>
+                    UP SOCIAL
+                  </span>
+                </div>
+              </div>
             ) : null}
 
             <button

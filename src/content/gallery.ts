@@ -22,6 +22,8 @@ export type GalleryTheme = {
   description: string;
   cover: ImageVariantSet;
   posts: GalleryPost[];
+  /** CSS object-position for the cover crop, e.g. '70% center'. Defaults to 'center'. */
+  coverPosition?: string;
   /** CSS aspect-ratio for film-strip tiles, e.g. '16/9'. Defaults to '3/4'. */
   tileAspect?: string;
   /** Optional leading video tile (e.g. a customer testimonial). */
@@ -127,6 +129,7 @@ export const galleryThemes: GalleryTheme[] = [
     name: 'Praxen',
     description: 'Räume, Team und Atmosphäre aus der kieferorthopädischen Praxis.',
     cover: img(KFO, 'kfo-1', 'Praxen — kieferorthopädische Praxis'),
+    coverPosition: '70% center',
     posts: [3, 4, 5, 6].map((id) => single(KFO, 'kfo', id)),
     video: {
       href: 'https://www.youtube.com/@UpSocialProduction',

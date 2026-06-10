@@ -146,6 +146,11 @@ export function GalleryFilmStrip({
             target='_blank'
             rel='noreferrer noopener'
             aria-label={`${video.label} — auf YouTube ansehen`}
+            onClick={(event) => {
+              const d = dragRef.current;
+              // Suppress navigation only when the click ends a drag of the strip.
+              if (d && d.moved > DRAG_THRESHOLD_PX) event.preventDefault();
+            }}
             className={`group relative shrink-0 overflow-hidden bg-[var(--color-bg-secondary)] shadow-[0_18px_44px_-28px_rgba(43,38,28,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-border-focus)] focus-visible:outline-offset-2 ${tileHeight}`}
             style={{ aspectRatio: tileAspect }}
           >

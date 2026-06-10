@@ -1,9 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { type ImageVariantSet, getImageSrc, getImageSrcSet } from '@/content/gallery';
+import { Play } from 'lucide-react';
+import {
+  type GalleryVideo,
+  type ImageVariantSet,
+  getImageSrc,
+  getImageSrcSet,
+} from '@/content/gallery';
 import { ImageWatermark } from '@/components/image-watermark';
 
 type GalleryFilmStripProps = {
   images: ImageVariantSet[];
+  video?: GalleryVideo;
   onImageClick?: (index: number) => void;
   themeName: string;
   tileAspect?: string;
@@ -17,6 +24,7 @@ function pad2(n: number) {
 
 export function GalleryFilmStrip({
   images,
+  video,
   onImageClick,
   themeName,
   tileAspect = '3/4',
@@ -132,6 +140,53 @@ export function GalleryFilmStrip({
         className='flex w-full select-none gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain px-5 pb-8 pt-1 sm:gap-6 sm:px-8 lg:gap-8 lg:px-10 [&::-webkit-scrollbar]:hidden data-[dragging=true]:cursor-grabbing cursor-grab [scrollbar-width:none]'
         style={{ scrollBehavior: 'auto' }}
       >
+        {video && (
+          <a
+            href={video.href}
+            target='_blank'
+            rel='noreferrer noopener'
+            aria-label={`${video.label} — auf YouTube ansehen`}
+            onClick={(event) => {
+              const d = dragRef.current;
+              // Suppress navigation only when the click ends a drag of the strip.
+              if (d && d.moved > DRAG_THRESHOLD_PX) event.preventDefault();
+            }}
+            className={`group relative shrink-0 overflow-hidden bg-[var(--color-bg-secondary)] shadow-[0_18px_44px_-28px_rgba(43,38,28,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-border-focus)] focus-visible:outline-offset-2 ${tileHeight}`}
+            style={{ aspectRatio: tileAspect }}
+          >
+            {video.poster && (
+              <picture>
+                <source srcSet={getImageSrcSet(video.poster, 'avif')} type='image/avif' />
+                <source srcSet={getImageSrcSet(video.poster, 'webp')} type='image/webp' />
+                <img
+                  src={getImageSrc(video.poster, 'md')}
+                  alt=''
+                  draggable={false}
+                  loading='eager'
+                  decoding='async'
+                  className='pointer-events-none h-full w-full object-cover object-center transition-transform duration-700 ease-editorial group-hover:scale-[1.1]'
+                />
+              </picture>
+            )}
+            <span
+              aria-hidden='true'
+              className='absolute inset-0 grid place-items-center bg-gradient-to-t from-black/70 via-black/25 to-black/40'
+            >
+              <span className='grid h-16 w-16 place-items-center rounded-full bg-white/90 text-black transition-colors duration-300 group-hover:bg-white sm:h-20 sm:w-20'>
+                <Play className='h-7 w-7 translate-x-0.5 fill-current sm:h-8 sm:w-8' />
+              </span>
+            </span>
+            <span
+              aria-hidden='true'
+              className='pointer-events-none absolute left-3 top-3 font-display text-xs uppercase tracking-[0.32em] text-white/85 sm:left-4 sm:top-4'
+            >
+              Video
+            </span>
+            <span className='pointer-events-none absolute inset-x-3 bottom-3 font-display text-lg font-normal leading-tight tracking-[-0.01em] text-white text-balance sm:inset-x-4 sm:bottom-4 sm:text-2xl'>
+              {video.label}
+            </span>
+          </a>
+        )}
         {images.map((image, i) => (
           <button
             key={image.base}

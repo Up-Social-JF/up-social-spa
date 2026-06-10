@@ -63,6 +63,7 @@ export function GalerieThemePage() {
       >
         <GalleryFilmStrip
           images={images}
+          video={theme.video}
           themeName={theme.name}
           onImageClick={setLightboxIndex}
           tileAspect={theme.tileAspect}

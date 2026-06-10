@@ -103,7 +103,8 @@ export function GalleryTeaser({
                         alt={theme.cover.alt}
                         loading='lazy'
                         decoding='async'
-                        className='h-full w-full object-cover object-center transition-transform duration-700 ease-editorial group-hover:scale-[1.1]'
+                        style={{ objectPosition: theme.coverPosition ?? 'center' }}
+                        className='h-full w-full object-cover transition-transform duration-700 ease-editorial group-hover:scale-[1.1]'
                       />
                     </picture>
                   </div>

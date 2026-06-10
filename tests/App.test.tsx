@@ -74,8 +74,14 @@ describe('App', () => {
     render(<App />);
 
     expect(await screen.findByRole('heading', { name: 'Impressum.' })).toBeInTheDocument();
-    expect(screen.getByText('E-Mail: info@up-social.de')).toBeInTheDocument();
-    expect(screen.getByText('Telefon: +49 176 21384822')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'info@up-social.de' })).toHaveAttribute(
+      'href',
+      'mailto:info@up-social.de'
+    );
+    expect(screen.getByRole('link', { name: '+49 176 21384822' })).toHaveAttribute(
+      'href',
+      'tel:+4917621384822'
+    );
   });
 
   it('opens and closes the contact panel', async () => {

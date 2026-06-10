@@ -3,11 +3,15 @@ import { MotionInView } from '@/components/motion/motion-in-view';
 import { founder } from '@/content/founder';
 
 const longParagraphs = [
-  'Ich heiße Julian Frey und arbeite als Fotograf und Marken-Builder aus München. Die Kombination ist kein Zufall — mein Blick fürs Bild ist die Grundlage für alles, was wir bei UpSocial bauen.',
-  'Vor UpSocial habe ich Marken aus Gastronomie, Design und Handwerk fotografiert. Dabei wurde mir klar: Bilder sind selten das Problem. Das Problem ist, dass sie selten zur Marke geführt werden — kein klarer Auftritt, kein Rhythmus, kein Plan, was mit dem Material passiert.',
-  'Mit UpSocial schließe ich diese Lücke. Wir starten oft mit Fotografie, weil das mein Handwerk ist. Aber wir hören da nicht auf. Social, Ads, Website und kleine Shops gehören für mich zusammengedacht.',
-  'Mein Anspruch: Auftritte, die ruhig wirken und trotzdem klar Conversion machen. Kein Hype, kein "Buzz" — sondern Bildwelten, die im Alltag der Marke funktionieren.',
-  'Ich arbeite persönlich. Du sprichst direkt mit mir, nicht mit einem Account-Team. Und ich sage offen, wenn etwas keinen Sinn ergibt — bevor du Geld dafür ausgibst.',
+  'Ich heiße Julian Frey und komme aus München.',
+  'Schon lange bevor ich mit Fotografie Geld verdient habe, war die Kamera mein ständiger Begleiter. Menschen haben mir immer wieder gesagt, dass ich ein Auge für Bilder habe – für Perspektiven, Stimmungen und die kleinen Details, die andere oft übersehen. Irgendwann wurde mir klar: Das ist nicht nur ein Hobby. Das ist das, was ich wirklich machen möchte.',
+  'Für mich ist Fotografie kein Beruf, sondern eine Leidenschaft. Ich liebe es, Geschichten sichtbar zu machen und Marken so zu zeigen, wie sie wirklich sind.',
+  'Deshalb geht es mir nie nur darum, schöne Bilder zu produzieren. Ich möchte dein Produkt verstehen, dein Restaurant erleben, dein Konzept fühlen und herausfinden, was dich besonders macht. Erst dann entstehen Bilder und Videos, die authentisch wirken und Menschen erreichen.',
+  'Aus dieser Denkweise ist UpSocial entstanden.',
+  'Wir starten oft mit Fotografie, weil dort meine Stärke liegt. Aber heute denke ich Marken ganzheitlich. Videografie, Social Media, Werbeanzeigen und Websites gehören für mich zusammen. Viele dieser Fähigkeiten habe ich mir selbst angeeignet, weil ich verstanden habe: Gute Bilder allein reichen nicht aus, wenn dahinter keine klare Strategie steht.',
+  'Mein Anspruch ist es, meine kreative Vision mit deinem Produkt zu verbinden. Mein Blick für Ästhetik und deine Idee ergeben gemeinsam etwas, das Aufmerksamkeit schafft, Vertrauen aufbaut und langfristig funktioniert.',
+  'Dabei arbeite ich persönlich und direkt. Du sprichst immer mit mir – nicht mit einem Account-Manager. Ich begleite Projekte von der ersten Idee bis zur Umsetzung und sage auch offen, wenn etwas keinen Sinn ergibt.',
+  'Denn am Ende geht es nicht darum, möglichst viel zu verkaufen. Es geht darum, etwas aufzubauen, das wirklich zu dir und deiner Marke passt.',
 ];
 
 export function AboutPage() {
@@ -44,7 +48,7 @@ export function AboutPage() {
               {founder.role}
             </p>
             <p className='mt-2 text-sm uppercase tracking-[0.2em] text-muted-foreground'>
-              München · DACH
+              München · Bayern
             </p>
           </div>
         </MotionInView>

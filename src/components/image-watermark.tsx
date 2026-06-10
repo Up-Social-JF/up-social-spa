@@ -5,10 +5,10 @@ type ImageWatermarkProps = {
   className?: string;
 };
 
-const textClass = {
-  sm: 'text-[clamp(0.55rem,1.6vw,0.95rem)] tracking-[0.4em] px-2 py-1',
-  md: 'text-[clamp(0.7rem,2.2vw,1.4rem)] tracking-[0.42em] px-3 py-1.5',
-  lg: 'text-[clamp(1.4rem,5vw,3.8rem)] tracking-[0.46em] px-5 py-3',
+const textSize = {
+  sm: 'text-[clamp(1rem,3.5vw,2.2rem)] tracking-[0.44em]',
+  md: 'text-[clamp(1.4rem,5vw,3.6rem)] tracking-[0.46em]',
+  lg: 'text-[clamp(2rem,7vw,5.5rem)] tracking-[0.5em]',
 } as const;
 
 export function ImageWatermark({ size = 'md', className }: ImageWatermarkProps) {
@@ -22,8 +22,8 @@ export function ImageWatermark({ size = 'md', className }: ImageWatermarkProps) 
     >
       <span
         className={cn(
-          'rounded-md bg-black/22 text-center font-display uppercase text-white/55 shadow-[0_0_0_1px_rgba(255,255,255,0.18)]',
-          textClass[size]
+          'select-none text-center font-display uppercase text-white/30',
+          textSize[size]
         )}
       >
         UP SOCIAL

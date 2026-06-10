@@ -3,113 +3,137 @@ export type ImageVariantSet = {
   alt: string;
 };
 
+/** A single entry in the film strip — one image or a swipeable carousel of images. */
+export type GalleryPost = {
+  images: ImageVariantSet[];
+};
+
 export type GalleryTheme = {
   slug: string;
   name: string;
-  folder: string;
-  filePrefix: string;
   description: string;
   cover: ImageVariantSet;
-  ids: Array<number | string>;
+  posts: GalleryPost[];
+  /** CSS aspect-ratio for film-strip tiles, e.g. '16/9'. Defaults to '3/4'. */
+  tileAspect?: string;
 };
 
-function imageSet(folder: string, name: string, alt: string): ImageVariantSet {
-  return {
-    base: `/${folder}/${name}/${name}`,
-    alt,
-  };
+function img(folder: string, name: string, alt: string): ImageVariantSet {
+  return { base: `/Webpage-Images/${folder}/${name}/${name}`, alt };
 }
 
-const eventsIds: Array<number | string> = ['1N', '2N', '3N', '4N', '5N', '6N'];
-const peopleIds = [22, 3, 38, 13, 28, 9, 41, 17, 31, 4, 25, 44, 36, 1, 18, 42, 8, 33, 15, 21];
-const zgkIds: Array<number | string> = [
-  1,
-  2,
-  3,
-  10,
-  11,
-  12,
-  13,
-  14,
-  15,
-  16,
-  18,
-  19,
-  21,
-  23,
-  24,
-  25,
-  26,
-  27,
-  '28N',
-  '29N',
-  '30N',
-  '31N',
-  '32N',
-  '33N',
-  '34N',
-];
+function single(folder: string, prefix: string, id: number | string): GalleryPost {
+  return { images: [img(folder, `${prefix}-${id}`, `${prefix} — Bild ${id}`)] };
+}
 
-export const heroImage: ImageVariantSet = imageSet(
-  'Webpage-Images/Natur',
+export const heroImage: ImageVariantSet = img(
+  'Natur',
   'natur-5',
   'Naturfotografie als ruhiger Markenraum'
 );
+
+// ─── ZGK ────────────────────────────────────────────────────────────────────
+
+const ZGK = 'ZGK';
+
+function amb(n: number): GalleryPost {
+  return { images: [img(ZGK, `amb-${n}`, 'Zum Goldenen Kalb — Ambiente')] };
+}
+
+// shuffled order, fixed at build time
+const ambientePosts: GalleryPost[] = [
+  amb(7),
+  amb(3),
+  amb(11),
+  amb(1),
+  amb(9),
+  amb(5),
+  amb(12),
+  amb(2),
+  amb(8),
+  amb(4),
+  amb(10),
+  amb(6),
+];
+
+const janbullPost: GalleryPost = {
+  images: [
+    img(ZGK, 'janbull-1', 'Jan Bull — Wagyu Beef'),
+    img(ZGK, 'janbull-2', 'Jan Bull — Wagyu Beef'),
+    img(ZGK, 'janbull-3', 'Jan Bull — Wagyu Beef'),
+    img(ZGK, 'janbull-4', 'Jan Bull — Wagyu Beef'),
+  ],
+};
+
+const herefordPost: GalleryPost = {
+  images: [
+    img(ZGK, 'hereford-1', 'Hereford Steakhouse'),
+    img(ZGK, 'hereford-2', 'Hereford Steakhouse'),
+    img(ZGK, 'hereford-3', 'Hereford Steakhouse'),
+    img(ZGK, 'hereford-4', 'Hereford Steakhouse'),
+  ],
+};
+
+// ─── Galleries ──────────────────────────────────────────────────────────────
 
 export const galleryThemes: GalleryTheme[] = [
   {
     slug: 'nature',
     name: 'Nature',
-    folder: 'Webpage-Images/Natur',
-    filePrefix: 'natur',
     description: 'Natürliche Bildwelten mit Ruhe, Tiefe und Textur.',
-    cover: imageSet('Webpage-Images/Natur', 'natur-5', 'Naturfotografie als ruhiger Markenraum'),
-    ids: [9, 2, 6, '13N', 11, 4, 8, 12, 3, 7, 10, 5],
+    cover: img('Natur', 'natur-5', 'Naturfotografie als ruhiger Markenraum'),
+    posts: [9, 2, 6, '13N', 11, 4, 8, 12, 3, 7, 10, 5].map((id) => single('Natur', 'natur', id)),
+    tileAspect: '16/9',
   },
   {
     slug: 'people',
     name: 'People',
-    folder: 'Webpage-Images/People',
-    filePrefix: 'people',
     description: 'Portraits und Menschen als nahbarer Markenanker.',
-    cover: imageSet('Webpage-Images/People', 'people-1', 'People — Portraits und Begegnungen'),
-    ids: peopleIds,
+    cover: img('People', 'people-1', 'People — Portraits und Begegnungen'),
+    posts: [22, 3, 38, 13, 28, 9, 41, 17, 31, 4, 25, 44, 36, 1, 18, 42, 8, 33, 15, 21].map((id) =>
+      single('People', 'people', id)
+    ),
   },
   {
     slug: 'zgk',
     name: 'Zum Goldenen Kalb',
-    folder: 'Webpage-Images/ZGK',
-    filePrefix: 'zgk',
     description: 'Atmosphäre, Räume und Begegnungen aus dem Zum Goldenen Kalb.',
-    cover: imageSet('Webpage-Images/ZGK', 'zgk-1', 'Zum Goldenen Kalb — Atmosphäre und Räume'),
-    ids: zgkIds,
+    cover: img(ZGK, 'amb-9', 'Zum Goldenen Kalb — Ambiente'),
+    posts: [herefordPost, janbullPost, ...ambientePosts],
   },
   {
     slug: 'events',
     name: 'Events',
-    folder: 'Webpage-Images/EVENTS',
-    filePrefix: 'events',
     description: 'Live-Momente, Stimmung und echte Begegnungen auf Events.',
-    cover: imageSet('Webpage-Images/EVENTS', 'events-1N', 'Events — Stimmung und Begegnungen'),
-    ids: eventsIds,
+    cover: img('EVENTS', 'events-6N', 'Events — Stimmung und Begegnungen'),
+    posts: (['1N', '2N', '3N', '4N', '6N'] as const).map((id) => single('EVENTS', 'events', id)),
   },
 ];
 
+// ─── Helpers ────────────────────────────────────────────────────────────────
+
 export function getThemeImages(theme: GalleryTheme): ImageVariantSet[] {
-  return theme.ids.map((id) => ({
-    base: `/${theme.folder}/${theme.filePrefix}-${id}/${theme.filePrefix}-${id}`,
-    alt: `${theme.name} — Bild ${id}`,
-  }));
+  return theme.posts.flatMap((p) => p.images);
 }
 
 export function getThemeCount(theme: GalleryTheme): number {
-  return theme.ids.length;
+  return getThemeImages(theme).length;
 }
 
-export const gallerySlugs = galleryThemes.map((theme) => theme.slug);
+/** Returns the flat image index at which each post starts (for lightbox positioning). */
+export function getPostStartIndices(theme: GalleryTheme): number[] {
+  let idx = 0;
+  return theme.posts.map((p) => {
+    const start = idx;
+    idx += p.images.length;
+    return start;
+  });
+}
+
+export const gallerySlugs = galleryThemes.map((t) => t.slug);
 
 export function getGalleryThemeBySlug(slug: string | undefined) {
-  return galleryThemes.find((theme) => theme.slug === slug);
+  return galleryThemes.find((t) => t.slug === slug);
 }
 
 export function getImageSrc(image: ImageVariantSet, size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '4k') {

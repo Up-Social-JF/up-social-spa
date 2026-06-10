@@ -74,7 +74,7 @@ export function KontaktPage() {
           className='mx-auto flex max-w-[var(--max-width-page)] flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between'
         >
           <p className='font-display text-2xl font-light tracking-[-0.025em] text-foreground sm:text-3xl'>
-            Aus München. Für ganz DACH.
+            Aus München. Für ganz Bayern.
           </p>
           <p className='text-sm uppercase tracking-[0.2em] text-muted-foreground'>
             Antwort meist innerhalb 24h

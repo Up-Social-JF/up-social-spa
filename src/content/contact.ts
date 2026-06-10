@@ -25,6 +25,12 @@ export const contactChannels: ContactChannel[] = [
     external: true,
   },
   {
+    label: 'YouTube',
+    href: 'https://www.youtube.com/@UpSocialProduction',
+    note: 'Channel ansehen',
+    external: true,
+  },
+  {
     label: 'E-Mail',
     href: 'mailto:info@up-social.de',
     note: 'Projekt anfragen',

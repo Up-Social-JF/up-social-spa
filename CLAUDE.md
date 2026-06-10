@@ -51,7 +51,7 @@ Core principles:
 - Photography first, copy second.
 - Show capability breadth without pricing tables or package tiers.
 - Keep the entry casual but the execution premium.
-- Preserve the Munich/DACH and Julian-as-real-person trust story.
+- Preserve the Munich/Bavaria and Julian-as-real-person trust story.
 - Use German copy and `du`-leaning direct language unless existing content says otherwise.
 
 ## Visual System

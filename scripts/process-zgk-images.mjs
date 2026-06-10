@@ -43,9 +43,18 @@ async function processImage(srcPath, outDir, outName) {
 
   for (const [sizeName, width] of Object.entries(SIZES)) {
     const pipe = sharp(srcPath).resize({ width, withoutEnlargement: false });
-    await pipe.clone().avif({ quality: 72 }).toFile(join(outDir, `${outName}-${sizeName}.avif`));
-    await pipe.clone().webp({ quality: 80 }).toFile(join(outDir, `${outName}-${sizeName}.webp`));
-    await pipe.clone().jpeg({ quality: 85, mozjpeg: true }).toFile(join(outDir, `${outName}-${sizeName}.jpg`));
+    await pipe
+      .clone()
+      .avif({ quality: 72 })
+      .toFile(join(outDir, `${outName}-${sizeName}.avif`));
+    await pipe
+      .clone()
+      .webp({ quality: 80 })
+      .toFile(join(outDir, `${outName}-${sizeName}.webp`));
+    await pipe
+      .clone()
+      .jpeg({ quality: 85, mozjpeg: true })
+      .toFile(join(outDir, `${outName}-${sizeName}.jpg`));
     process.stdout.write('.');
   }
   console.log(` ✓ ${outName}`);
@@ -55,10 +64,18 @@ async function main() {
   console.log('\n=== Processing Ambiente images (amb-1 … amb-12) ===');
   const AMB = join(ZGK_UPDATE, 'Ambiente');
   const ambienteOrder = [
-    'IMG_8793-2', 'IMG_8804', 'IMG_8817', 'IMG_8819',
-    'IMG_8826', 'IMG_8852', 'IMG_8861', 'IMG_9071',
-    'IMG_9083',  // → amb-9 = cover
-    'IMG_9086', 'IMG_9090', 'IMG_9091',
+    'IMG_8793-2',
+    'IMG_8804',
+    'IMG_8817',
+    'IMG_8819',
+    'IMG_8826',
+    'IMG_8852',
+    'IMG_8861',
+    'IMG_9071',
+    'IMG_9083', // → amb-9 = cover
+    'IMG_9086',
+    'IMG_9090',
+    'IMG_9091',
   ];
 
   for (let i = 0; i < ambienteOrder.length; i++) {

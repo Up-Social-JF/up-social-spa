@@ -127,11 +127,11 @@ export const galleryThemes: GalleryTheme[] = [
     name: 'Praxen',
     description: 'Räume, Team und Atmosphäre aus der kieferorthopädischen Praxis.',
     cover: img(KFO, 'kfo-1', 'Praxen — kieferorthopädische Praxis'),
-    posts: [2, 3, 4, 5, 6].map((id) => single(KFO, 'kfo', id)),
+    posts: [3, 4, 5, 6].map((id) => single(KFO, 'kfo', id)),
     video: {
       href: 'https://www.youtube.com/@UpSocialProduction',
-      label: 'Video: Dr. Udo Windsheimer',
-      poster: img(KFO, 'kfo-2', 'Video mit Dr. Udo Windsheimer'),
+      label: 'Interview mit Dr. Udo Windsheimer',
+      poster: img(KFO, 'kfo-2', 'Interview mit Dr. Udo Windsheimer'),
     },
   },
 ];

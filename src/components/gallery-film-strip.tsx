@@ -177,7 +177,7 @@ export function GalleryFilmStrip({
             >
               Video
             </span>
-            <span className='pointer-events-none absolute inset-x-3 bottom-3 font-display text-sm font-light leading-tight tracking-[-0.01em] text-white text-balance sm:inset-x-4 sm:bottom-4 sm:text-base'>
+            <span className='pointer-events-none absolute inset-x-3 bottom-3 font-display text-lg font-normal leading-tight tracking-[-0.01em] text-white text-balance sm:inset-x-4 sm:bottom-4 sm:text-2xl'>
               {video.label}
             </span>
           </a>

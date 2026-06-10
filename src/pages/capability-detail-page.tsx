@@ -34,7 +34,7 @@ export function CapabilityDetailPage() {
               Leistung
             </p>
           </div>
-          <h1 className='max-w-5xl text-[clamp(3rem,9vw,7rem)] font-light leading-[0.94] tracking-[-0.05em] text-balance text-foreground'>
+          <h1 className='max-w-5xl text-[clamp(3rem,9vw,7rem)] font-light leading-[0.94] tracking-[-0.05em] text-balance hyphens-auto break-words text-foreground'>
             {capability.name}
           </h1>
           <p className='max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg'>

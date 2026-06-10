@@ -32,7 +32,7 @@ export function CapabilityCard({ capability, className }: CapabilityCardProps) {
       </div>
 
       <header className='min-w-0 space-y-2'>
-        <h3 className='text-balance font-display text-2xl font-light leading-tight tracking-[-0.025em] text-foreground sm:text-3xl'>
+        <h3 className='text-balance hyphens-auto break-words font-display text-2xl font-light leading-tight tracking-[-0.025em] text-foreground sm:text-3xl'>
           {capability.name}
         </h3>
         <p className='text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base'>

@@ -1,7 +1,7 @@
 # UpSocial by JF SPA
 
 Photography-led marketing website for UpSocial by JF, built as a Vite + React single-page app.
-The site presents Julian Frey, his service capabilities, editorial gallery work, and direct contact paths for prospective Munich/DACH clients.
+The site presents Julian Frey, his service capabilities, editorial gallery work, and direct contact paths for prospective Munich/Bavaria clients.
 
 ## What Is Included
 

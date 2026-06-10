@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { getImageSrc, getImageSrcSet, type ImageVariantSet } from '@/content/gallery';
+import { type ImageVariantSet, getImageSrc, getImageSrcSet } from '@/content/gallery';
 import { ImageWatermark } from '@/components/image-watermark';
 
 type GalleryFilmStripProps = {
   images: ImageVariantSet[];
   onImageClick?: (index: number) => void;
   themeName: string;
+  tileAspect?: string;
 };
-
-const FILM_STRIP_ASPECT_RATIO: readonly [number, number] = [3, 4];
 
 const DRAG_THRESHOLD_PX = 8;
 
@@ -16,7 +15,12 @@ function pad2(n: number) {
   return n.toString().padStart(2, '0');
 }
 
-export function GalleryFilmStrip({ images, onImageClick, themeName }: GalleryFilmStripProps) {
+export function GalleryFilmStrip({
+  images,
+  onImageClick,
+  themeName,
+  tileAspect = '3/4',
+}: GalleryFilmStripProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{
     pointerId: number;
@@ -34,7 +38,6 @@ export function GalleryFilmStrip({ images, onImageClick, themeName }: GalleryFil
       const max = el.scrollWidth - el.clientWidth;
       const p = max > 0 ? el.scrollLeft / max : 0;
       setProgress(p);
-      // estimate current centered index by mapping scrollLeft to children
       const items = el.querySelectorAll<HTMLElement>('[data-img-index]');
       if (items.length === 0) return;
       const center = el.scrollLeft + el.clientWidth / 2;
@@ -61,7 +64,6 @@ export function GalleryFilmStrip({ images, onImageClick, themeName }: GalleryFil
   }, [images.length]);
 
   const onPointerDown = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
-    // let touch use native horizontal scroll (kinetic momentum on mobile)
     if (event.pointerType === 'touch') return;
     if (event.button !== undefined && event.button !== 0) return;
     const el = scrollRef.current;
@@ -91,7 +93,6 @@ export function GalleryFilmStrip({ images, onImageClick, themeName }: GalleryFil
     if (!d || !el || d.pointerId !== event.pointerId) return;
     el.releasePointerCapture?.(event.pointerId);
     delete el.dataset.dragging;
-    // dragRef.current intentionally kept for click suppression below
   }, []);
 
   const onClick = useCallback(
@@ -114,6 +115,9 @@ export function GalleryFilmStrip({ images, onImageClick, themeName }: GalleryFil
 
   if (images.length === 0) return null;
 
+  const isLandscape = tileAspect !== '3/4';
+  const tileHeight = isLandscape ? 'h-[clamp(336px,62vh,744px)]' : 'h-[clamp(380px,68vh,760px)]';
+
   return (
     <div className='relative'>
       <div
@@ -128,48 +132,45 @@ export function GalleryFilmStrip({ images, onImageClick, themeName }: GalleryFil
         className='flex w-full select-none gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain px-5 pb-8 pt-1 sm:gap-6 sm:px-8 lg:gap-8 lg:px-10 [&::-webkit-scrollbar]:hidden data-[dragging=true]:cursor-grabbing cursor-grab [scrollbar-width:none]'
         style={{ scrollBehavior: 'auto' }}
       >
-        {images.map((image, i) => {
-          const [aw, ah] = FILM_STRIP_ASPECT_RATIO;
-          return (
-            <button
-              key={image.base}
-              type='button'
-              data-img-index={i}
-              aria-label={`${image.alt} — vergrößern`}
-              className='group relative h-[clamp(380px,68vh,760px)] shrink-0 overflow-hidden bg-[var(--color-bg-secondary)] shadow-[0_18px_44px_-28px_rgba(43,38,28,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-border-focus)] focus-visible:outline-offset-2'
-              style={{ aspectRatio: `${aw}/${ah}` }}
+        {images.map((image, i) => (
+          <button
+            key={image.base}
+            type='button'
+            data-img-index={i}
+            aria-label={`${image.alt} — vergrößern`}
+            className={`group relative shrink-0 overflow-hidden bg-[var(--color-bg-secondary)] shadow-[0_18px_44px_-28px_rgba(43,38,28,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-border-focus)] focus-visible:outline-offset-2 ${tileHeight}`}
+            style={{ aspectRatio: tileAspect }}
+          >
+            <picture>
+              <source
+                srcSet={getImageSrcSet(image, 'avif')}
+                sizes='(min-width: 1280px) 720px, (min-width: 768px) 55vw, 85vw'
+                type='image/avif'
+              />
+              <source
+                srcSet={getImageSrcSet(image, 'webp')}
+                sizes='(min-width: 1280px) 720px, (min-width: 768px) 55vw, 85vw'
+                type='image/webp'
+              />
+              <img
+                src={getImageSrc(image, 'md')}
+                alt={image.alt}
+                draggable={false}
+                loading={i < 3 ? 'eager' : 'lazy'}
+                fetchPriority={i < 3 ? 'high' : 'auto'}
+                decoding='async'
+                className='pointer-events-none h-full w-full object-contain object-center transition-transform duration-700 ease-editorial group-hover:scale-[1.1]'
+              />
+            </picture>
+            <span
+              aria-hidden='true'
+              className='pointer-events-none absolute left-3 top-3 font-display text-xs uppercase tracking-[0.32em] text-white/85 mix-blend-difference sm:left-4 sm:top-4'
             >
-              <picture>
-                <source
-                  srcSet={getImageSrcSet(image, 'avif')}
-                  sizes='(min-width: 1280px) 720px, (min-width: 768px) 55vw, 85vw'
-                  type='image/avif'
-                />
-                <source
-                  srcSet={getImageSrcSet(image, 'webp')}
-                  sizes='(min-width: 1280px) 720px, (min-width: 768px) 55vw, 85vw'
-                  type='image/webp'
-                />
-                <img
-                  src={getImageSrc(image, 'md')}
-                  alt={image.alt}
-                  draggable={false}
-                  loading={i < 3 ? 'eager' : 'lazy'}
-                  fetchPriority={i < 3 ? 'high' : 'auto'}
-                  decoding='async'
-                  className='pointer-events-none h-full w-full object-contain object-center transition-transform duration-700 ease-editorial group-hover:scale-[1.1]'
-                />
-              </picture>
-              <span
-                aria-hidden='true'
-                className='pointer-events-none absolute left-3 top-3 font-display text-xs uppercase tracking-[0.32em] text-white/85 mix-blend-difference sm:left-4 sm:top-4'
-              >
-                {pad2(i + 1)}
-              </span>
-              <ImageWatermark size='md' />
-            </button>
-          );
-        })}
+              {pad2(i + 1)}
+            </span>
+            <ImageWatermark size='md' />
+          </button>
+        ))}
       </div>
 
       <div className='mx-auto flex max-w-[var(--max-width-page)] items-center gap-4 px-5 pt-2 sm:px-8 lg:px-10'>

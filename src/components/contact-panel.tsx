@@ -96,7 +96,7 @@ export function ContactPanel() {
         </ul>
 
         <p className='mt-auto px-7 pb-9 pt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground sm:px-10'>
-          Aus München. Für ganz DACH.
+          Aus München. Für ganz Bayern.
         </p>
       </SheetContent>
     </Sheet>

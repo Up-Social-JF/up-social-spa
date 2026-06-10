@@ -142,7 +142,7 @@ export function MobileNav({ variant }: MobileNavProps) {
             <ArrowUpRight aria-hidden='true' />
           </Button>
           <p className='text-xs uppercase tracking-[0.2em] text-muted-foreground'>
-            Aus München. Für ganz DACH.
+            Aus München. Für ganz Bayern.
           </p>
         </div>
       </SheetContent>

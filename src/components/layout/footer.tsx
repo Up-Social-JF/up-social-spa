@@ -44,7 +44,7 @@ export function Footer() {
                 {channel.label}
               </a>
             ))}
-          <span>Aus München. Für ganz DACH.</span>
+          <span>Aus München. Für ganz Bayern.</span>
         </div>
       </div>
 

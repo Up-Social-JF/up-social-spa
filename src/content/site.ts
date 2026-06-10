@@ -2,7 +2,7 @@ export const site = {
   name: 'UpSocial by JF',
   logoWide: '/logo-wide.svg',
   logoMark: '/logo.svg',
-  location: 'München / DACH',
+  location: 'München / Bayern',
   claim: 'Fotografie-led Marketing aus München. Für Marken, die mit Bildern klarer werden.',
   primaryCta: 'Jetzt buchen',
   secondaryCta: 'Mehr erfahren',
@@ -13,7 +13,7 @@ export const pageIntros = {
     eyebrow: 'Leistungen',
     title: 'Was wir machen.',
     description:
-      'Sechs Fähigkeiten, frei kombinierbar: Fotografie, Social Media, Paid Ads, Websites, SEO und E-Commerce.',
+      'Fünf Fähigkeiten, frei kombinierbar: Fotografie, Social Media, Paid Ads, Websites und Videographie.',
   },
   galerie: {
     eyebrow: 'Galerie',

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Dialog as DialogPrimitive } from 'radix-ui';
 import { type ImageVariantSet, getImageSrc, getImageSrcSet } from '@/content/gallery';
+import { ImageWatermark } from '@/components/image-watermark';
 import { cn } from '@/utils/cn';
 
 type LightboxProps = {
@@ -137,14 +138,7 @@ export function Lightbox({ images, index, onIndexChange, themeName }: LightboxPr
                     className='h-full w-full object-contain'
                   />
                 </picture>
-                <div
-                  aria-hidden='true'
-                  className='pointer-events-none absolute inset-0 flex items-center justify-center'
-                >
-                  <span className='rounded-md bg-black/28 px-5 py-3 text-center font-display text-[clamp(1.4rem,5vw,3.8rem)] uppercase tracking-[0.46em] text-white/55 shadow-[0_0_0_1px_rgba(255,255,255,0.22)]'>
-                    UP SOCIAL
-                  </span>
-                </div>
+                <ImageWatermark size='lg' />
               </div>
             ) : null}
 

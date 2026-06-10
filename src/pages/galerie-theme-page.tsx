@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Navigate, useParams } from 'react-router';
 import { CTABanner } from '@/components/layout/cta-banner';
 import { GalleryTile } from '@/components/gallery-tile';
@@ -11,12 +11,25 @@ import {
   getThemeCount,
   getThemeImages,
 } from '@/content/gallery';
+import { useTheme } from '@/hooks/use-theme';
 
 export function GalerieThemePage() {
   const { theme: themeSlug } = useParams();
   const theme = getGalleryThemeBySlug(themeSlug);
   const images = useMemo(() => (theme ? getThemeImages(theme) : []), [theme]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const { theme: colorTheme, setTheme } = useTheme();
+  const prevTheme = useRef(colorTheme);
+
+  useEffect(() => {
+    prevTheme.current = colorTheme;
+    setTheme('dark');
+    return () => {
+      setTheme(prevTheme.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!theme) {
     return <Navigate to='/404' replace />;
@@ -48,7 +61,12 @@ export function GalerieThemePage() {
         aria-label={`${theme.name} Bilder`}
         className='bg-background pb-20 sm:pb-24 lg:pb-28'
       >
-        <GalleryFilmStrip images={images} themeName={theme.name} onImageClick={setLightboxIndex} />
+        <GalleryFilmStrip
+          images={images}
+          themeName={theme.name}
+          onImageClick={setLightboxIndex}
+          tileAspect={theme.tileAspect}
+        />
       </section>
 
       <section

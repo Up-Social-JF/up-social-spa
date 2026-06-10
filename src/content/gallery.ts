@@ -10,29 +10,48 @@ export type GalleryTheme = {
   filePrefix: string;
   description: string;
   cover: ImageVariantSet;
-  ids: number[];
+  ids: Array<number | string>;
 };
 
 function imageSet(folder: string, name: string, alt: string): ImageVariantSet {
   return {
-    base: `/images/${folder}/${name}/${name}`,
+    base: `/${folder}/${name}/${name}`,
     alt,
   };
 }
 
-const naturIds = [7, 2, 11, 4, 9, 1, 12, 6, 8, 3, 10, 5];
-
-const peopleIds = [
-  22, 3, 38, 13, 28, 9, 41, 17, 31, 4, 25, 44, 36, 1, 18, 42, 8, 33, 15, 21, 39, 2, 12, 37, 54, 16,
-  32, 26, 43, 34, 40,
-];
-
-const zgkIds = [
-  14, 3, 22, 8, 17, 25, 1, 11, 19, 5, 27, 13, 9, 21, 4, 16, 23, 7, 20, 12, 2, 18, 26, 10, 24, 6, 15,
+const eventsIds: Array<number | string> = ['1N', '2N', '3N', '4N', '5N', '6N'];
+const peopleIds = [22, 3, 38, 13, 28, 9, 41, 17, 31, 4, 25, 44, 36, 1, 18, 42, 8, 33, 15, 21];
+const zgkIds: Array<number | string> = [
+  1,
+  2,
+  3,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  18,
+  19,
+  21,
+  23,
+  24,
+  25,
+  26,
+  27,
+  '28N',
+  '29N',
+  '30N',
+  '31N',
+  '32N',
+  '33N',
+  '34N',
 ];
 
 export const heroImage: ImageVariantSet = imageSet(
-  'Natur',
+  'Webpage-Images/Natur',
   'natur-5',
   'Naturfotografie als ruhiger Markenraum'
 );
@@ -41,35 +60,44 @@ export const galleryThemes: GalleryTheme[] = [
   {
     slug: 'nature',
     name: 'Nature',
-    folder: 'Natur',
+    folder: 'Webpage-Images/Natur',
     filePrefix: 'natur',
     description: 'Natürliche Bildwelten mit Ruhe, Tiefe und Textur.',
-    cover: imageSet('Natur', 'natur-5', 'Naturfotografie als ruhiger Markenraum'),
-    ids: naturIds,
+    cover: imageSet('Webpage-Images/Natur', 'natur-5', 'Naturfotografie als ruhiger Markenraum'),
+    ids: [9, 2, 6, '13N', 11, 4, 8, 12, 3, 7, 10, 5],
   },
   {
     slug: 'people',
     name: 'People',
-    folder: 'People',
+    folder: 'Webpage-Images/People',
     filePrefix: 'people',
     description: 'Portraits und Menschen als nahbarer Markenanker.',
-    cover: imageSet('People', 'people-22', 'Editoriales Portrait einer Person'),
+    cover: imageSet('Webpage-Images/People', 'people-1', 'People — Portraits und Begegnungen'),
     ids: peopleIds,
   },
   {
     slug: 'zgk',
     name: 'Zum Goldenen Kalb',
-    folder: 'ZGK',
+    folder: 'Webpage-Images/ZGK',
     filePrefix: 'zgk',
     description: 'Atmosphäre, Räume und Begegnungen aus dem Zum Goldenen Kalb.',
-    cover: imageSet('ZGK', 'zgk-1', 'Zum Goldenen Kalb — Atmosphäre und Räume'),
+    cover: imageSet('Webpage-Images/ZGK', 'zgk-1', 'Zum Goldenen Kalb — Atmosphäre und Räume'),
     ids: zgkIds,
+  },
+  {
+    slug: 'events',
+    name: 'Events',
+    folder: 'Webpage-Images/EVENTS',
+    filePrefix: 'events',
+    description: 'Live-Momente, Stimmung und echte Begegnungen auf Events.',
+    cover: imageSet('Webpage-Images/EVENTS', 'events-1N', 'Events — Stimmung und Begegnungen'),
+    ids: eventsIds,
   },
 ];
 
 export function getThemeImages(theme: GalleryTheme): ImageVariantSet[] {
   return theme.ids.map((id) => ({
-    base: `/images/${theme.folder}/${theme.filePrefix}-${id}/${theme.filePrefix}-${id}`,
+    base: `/${theme.folder}/${theme.filePrefix}-${id}/${theme.filePrefix}-${id}`,
     alt: `${theme.name} — Bild ${id}`,
   }));
 }

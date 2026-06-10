@@ -1,6 +1,7 @@
 import { ArrowUpRight } from 'lucide-react';
 import { motion, type Variants } from 'motion/react';
 import { Link } from 'react-router';
+import { ImageWatermark } from '@/components/image-watermark';
 import { MotionInView } from '@/components/motion/motion-in-view';
 import { galleryThemes, getImageSrc, getImageSrcSet, getThemeCount } from '@/content/gallery';
 import { cn } from '@/utils/cn';
@@ -87,26 +88,40 @@ export function GalleryTeaser({
                 <figure className='relative overflow-hidden bg-[var(--color-bg-secondary)]'>
                   <div className='aspect-[4/5]'>
                     <picture>
-                      <source srcSet={getImageSrcSet(theme.cover, 'avif')} type='image/avif' />
-                      <source srcSet={getImageSrcSet(theme.cover, 'webp')} type='image/webp' />
+                      <source
+                        srcSet={getImageSrcSet(theme.cover, 'avif')}
+                        sizes='(min-width: 640px) 32vw, 94vw'
+                        type='image/avif'
+                      />
+                      <source
+                        srcSet={getImageSrcSet(theme.cover, 'webp')}
+                        sizes='(min-width: 640px) 32vw, 94vw'
+                        type='image/webp'
+                      />
                       <img
-                        src={getImageSrc(theme.cover, 'md')}
+                        src={getImageSrc(theme.cover, 'lg')}
                         alt={theme.cover.alt}
                         loading='lazy'
                         decoding='async'
-                        className='h-full w-full object-cover object-center transition-transform duration-700 ease-editorial group-hover:scale-[1.04]'
+                        className='h-full w-full object-cover object-center transition-transform duration-700 ease-editorial group-hover:scale-[1.1]'
                       />
                     </picture>
                   </div>
+                  <ImageWatermark size='sm' />
                   <span
                     aria-hidden='true'
                     className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgb(10_10_10_/_55%)_100%)] opacity-90 transition-opacity duration-300 group-hover:opacity-100'
                   />
-                  <figcaption className='absolute inset-x-3 bottom-3 flex items-baseline justify-between gap-2 text-[var(--paper)] sm:inset-x-4 sm:bottom-4'>
-                    <span className='font-display text-base font-light tracking-[-0.02em] sm:text-lg'>
+                  <figcaption className='absolute inset-x-3 bottom-3 flex items-end justify-between gap-2 text-[var(--paper)] sm:inset-x-4 sm:bottom-4'>
+                    <span
+                      className={cn(
+                        'min-w-0 flex-1 font-display font-light leading-tight tracking-[-0.02em] text-balance',
+                        theme.slug === 'zgk' ? 'text-sm sm:text-base' : 'text-base sm:text-lg'
+                      )}
+                    >
                       {theme.name}
                     </span>
-                    <span className='text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--paper)]/75'>
+                    <span className='shrink-0 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--paper)]/75'>
                       {getThemeCount(theme)} Bilder
                     </span>
                   </figcaption>

@@ -58,10 +58,7 @@ async function processFile(path) {
   const input = await readFile(path);
   const { width, height } = await sharp(input).metadata();
   const svg = watermarkSvg(width, height);
-  const out = await encode(
-    ext,
-    sharp(input).composite([{ input: svg, top: 0, left: 0 }])
-  );
+  const out = await encode(ext, sharp(input).composite([{ input: svg, top: 0, left: 0 }]));
   await writeFile(path, out);
   await appendFile(MANIFEST, path + '\n');
 }

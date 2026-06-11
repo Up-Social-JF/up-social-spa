@@ -21,6 +21,12 @@ export type GalleryTheme = {
   name: string;
   description: string;
   cover: ImageVariantSet;
+  /**
+   * Un-watermarked cover used only on the home landing page (hero + teaser).
+   * Falls back to `cover` when omitted. The full galleries keep the baked
+   * "UP SOCIAL" mark for download protection.
+   */
+  landingCover?: ImageVariantSet;
   posts: GalleryPost[];
   /** CSS object-position for the cover crop, e.g. '70% center'. Defaults to 'center'. */
   coverPosition?: string;
@@ -38,8 +44,10 @@ function single(folder: string, prefix: string, id: number | string): GalleryPos
   return { images: [img(folder, `${prefix}-${id}`, `${prefix} — Bild ${id}`)] };
 }
 
+// The home hero is a landing-page surface, so it uses the clean (un-watermarked)
+// copy of natur-5 living under Webpage-Images/Landing.
 export const heroImage: ImageVariantSet = img(
-  'Natur',
+  'Landing',
   'natur-5',
   'Naturfotografie als ruhiger Markenraum'
 );
@@ -98,6 +106,7 @@ export const galleryThemes: GalleryTheme[] = [
     name: 'Nature',
     description: 'Natürliche Bildwelten mit Ruhe, Tiefe und Textur.',
     cover: img('Natur', 'natur-5', 'Naturfotografie als ruhiger Markenraum'),
+    landingCover: img('Landing', 'natur-5', 'Naturfotografie als ruhiger Markenraum'),
     posts: [9, 2, 6, '13N', 11, 4, 8, 12, 3, 7, 10, 5].map((id) => single('Natur', 'natur', id)),
     tileAspect: '16/9',
   },
@@ -106,6 +115,7 @@ export const galleryThemes: GalleryTheme[] = [
     name: 'People',
     description: 'Portraits und Menschen als nahbarer Markenanker.',
     cover: img('People', 'people-1', 'People — Portraits und Begegnungen'),
+    landingCover: img('Landing', 'people-1', 'People — Portraits und Begegnungen'),
     posts: [22, 3, 38, 13, 28, 9, 41, 17, 31, 4, 25, 44, 36, 1, 18, 42, 8, 33, 15, 21].map((id) =>
       single('People', 'people', id)
     ),
@@ -115,6 +125,7 @@ export const galleryThemes: GalleryTheme[] = [
     name: 'Zum Goldenen Kalb',
     description: 'Atmosphäre, Räume und Begegnungen aus dem Zum Goldenen Kalb.',
     cover: img(ZGK, 'amb-9', 'Zum Goldenen Kalb — Ambiente'),
+    landingCover: img('Landing', 'amb-9', 'Zum Goldenen Kalb — Ambiente'),
     posts: [herefordPost, janbullPost, ...ambientePosts],
   },
   {
@@ -122,6 +133,7 @@ export const galleryThemes: GalleryTheme[] = [
     name: 'Events',
     description: 'Live-Momente, Stimmung und echte Begegnungen auf Events.',
     cover: img('EVENTS', 'events-6N', 'Events — Stimmung und Begegnungen'),
+    landingCover: img('Landing', 'events-6N', 'Events — Stimmung und Begegnungen'),
     posts: (['1N', '2N', '3N', '4N', '6N'] as const).map((id) => single('EVENTS', 'events', id)),
   },
   {
@@ -129,6 +141,7 @@ export const galleryThemes: GalleryTheme[] = [
     name: 'Praxen',
     description: 'Räume, Team und Atmosphäre aus der kieferorthopädischen Praxis.',
     cover: img(KFO, 'kfo-1', 'Praxen — kieferorthopädische Praxis'),
+    landingCover: img('Landing', 'kfo-1', 'Praxen — kieferorthopädische Praxis'),
     coverPosition: '70% center',
     posts: [3, 4, 5, 6].map((id) => single(KFO, 'kfo', id)),
     video: {

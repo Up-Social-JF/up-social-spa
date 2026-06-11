@@ -34,6 +34,7 @@ export function GalleryFilmStrip({
     startX: number;
     startScrollLeft: number;
     moved: number;
+    captured: boolean;
   } | null>(null);
   const [progress, setProgress] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -80,9 +81,8 @@ export function GalleryFilmStrip({
       startX: event.clientX,
       startScrollLeft: el.scrollLeft,
       moved: 0,
+      captured: false,
     };
-    el.setPointerCapture?.(event.pointerId);
-    el.dataset.dragging = 'true';
   }, []);
 
   const onPointerMove = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
@@ -90,16 +90,28 @@ export function GalleryFilmStrip({
     const el = scrollRef.current;
     if (!d || !el || d.pointerId !== event.pointerId) return;
     const dx = event.clientX - d.startX;
-    el.scrollLeft = d.startScrollLeft - dx;
     d.moved = Math.abs(dx);
+    // Only capture the pointer once a real drag begins. Capturing on every
+    // pointerdown retargets the subsequent `click` to this container, which
+    // swallows navigation/activation on child links and buttons.
+    if (!d.captured && d.moved > DRAG_THRESHOLD_PX) {
+      el.setPointerCapture?.(event.pointerId);
+      el.dataset.dragging = 'true';
+      d.captured = true;
+    }
+    if (d.captured) {
+      el.scrollLeft = d.startScrollLeft - dx;
+    }
   }, []);
 
   const endDrag = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
     const d = dragRef.current;
     const el = scrollRef.current;
     if (!d || !el || d.pointerId !== event.pointerId) return;
-    el.releasePointerCapture?.(event.pointerId);
-    delete el.dataset.dragging;
+    if (d.captured) {
+      el.releasePointerCapture?.(event.pointerId);
+      delete el.dataset.dragging;
+    }
   }, []);
 
   const onClick = useCallback(
@@ -148,17 +160,12 @@ export function GalleryFilmStrip({
             onClick={(event) => {
               const d = dragRef.current;
               dragRef.current = null;
-              // A click that ends a strip drag should not navigate.
+              // A click that ends a strip drag should not navigate; otherwise let
+              // the native anchor handle the click so a single tap opens YouTube.
               if (d && d.moved > DRAG_THRESHOLD_PX) {
                 event.preventDefault();
-                return;
+                event.stopPropagation();
               }
-              // Let the browser handle modified clicks (new tab/window) natively.
-              if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
-              // Otherwise open the link explicitly so the strip's pointer
-              // handling can never swallow the navigation.
-              event.preventDefault();
-              window.open(video.href, '_blank', 'noopener,noreferrer');
             }}
             className={`group relative shrink-0 overflow-hidden bg-[var(--color-bg-secondary)] shadow-[0_18px_44px_-28px_rgba(43,38,28,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-border-focus)] focus-visible:outline-offset-2 ${tileHeight}`}
             style={{ aspectRatio: tileAspect }}

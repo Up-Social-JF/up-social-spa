@@ -1,6 +1,5 @@
 import { Link } from 'react-router';
 import { type GalleryTheme, getImageSrc, getImageSrcSet, getThemeCount } from '@/content/gallery';
-import { ImageWatermark } from '@/components/image-watermark';
 import { cn } from '@/utils/cn';
 
 type GalleryTileProps = {
@@ -60,7 +59,6 @@ export function GalleryTile({ theme, size = 'compact', className }: GalleryTileP
             />
           </picture>
         </div>
-        <ImageWatermark size={size === 'editorial' ? 'md' : 'sm'} />
         <span
           aria-hidden='true'
           className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_50%,rgb(10_10_10_/_60%)_100%)] opacity-90 transition-opacity duration-300 group-hover:opacity-100'

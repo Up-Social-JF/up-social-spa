@@ -2,6 +2,7 @@ import { CapabilityGrid } from '@/components/capability-grid';
 import { FounderSection } from '@/components/founder-section';
 import { GalleryTeaser } from '@/components/gallery-teaser';
 import { HomeHero } from '@/components/home-hero';
+import { LightroomSection } from '@/components/lightroom-section';
 import { ProcessSection } from '@/components/process-section';
 import { CTABanner } from '@/components/layout/cta-banner';
 import { pageIntros } from '@/content/site';
@@ -17,6 +18,7 @@ export function Main() {
         description={pageIntros.leistungen.description}
       />
       <FounderSection id='ueber' />
+      <LightroomSection id='lightroom' />
       <ProcessSection />
       <GalleryTeaser id='galerie' />
       <CTABanner id='kontakt' />

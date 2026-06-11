@@ -77,57 +77,60 @@ export function GalleryTeaser({
           staggerChildren={0.08}
           className='grid list-none grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4'
         >
-          {galleryThemes.map((theme) => (
-            <motion.li key={theme.slug} variants={tileVariants} className='group'>
-              <Link
-                to={`/galerie/${theme.slug}`}
-                aria-label={`${theme.name} Galerie öffnen`}
-                className='block focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-border-focus)] focus-visible:outline-offset-2'
-              >
-                <figure className='relative overflow-hidden bg-[var(--color-bg-secondary)]'>
-                  <div className='aspect-[4/5]'>
-                    <picture>
-                      <source
-                        srcSet={getImageSrcSet(theme.cover, 'avif')}
-                        sizes='(min-width: 640px) 32vw, 94vw'
-                        type='image/avif'
-                      />
-                      <source
-                        srcSet={getImageSrcSet(theme.cover, 'webp')}
-                        sizes='(min-width: 640px) 32vw, 94vw'
-                        type='image/webp'
-                      />
-                      <img
-                        src={getImageSrc(theme.cover, 'lg')}
-                        alt={theme.cover.alt}
-                        loading='lazy'
-                        decoding='async'
-                        style={{ objectPosition: theme.coverPosition ?? 'center' }}
-                        className='h-full w-full object-cover transition-transform duration-700 ease-editorial group-hover:scale-[1.1]'
-                      />
-                    </picture>
-                  </div>
-                  <span
-                    aria-hidden='true'
-                    className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgb(10_10_10_/_55%)_100%)] opacity-90 transition-opacity duration-300 group-hover:opacity-100'
-                  />
-                  <figcaption className='absolute inset-x-3 bottom-3 flex items-end justify-between gap-2 text-[var(--paper)] sm:inset-x-4 sm:bottom-4'>
+          {galleryThemes.map((theme) => {
+            const cover = theme.landingCover ?? theme.cover;
+            return (
+              <motion.li key={theme.slug} variants={tileVariants} className='group'>
+                <Link
+                  to={`/galerie/${theme.slug}`}
+                  aria-label={`${theme.name} Galerie öffnen`}
+                  className='block focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-border-focus)] focus-visible:outline-offset-2'
+                >
+                  <figure className='relative overflow-hidden bg-[var(--color-bg-secondary)]'>
+                    <div className='aspect-[4/5]'>
+                      <picture>
+                        <source
+                          srcSet={getImageSrcSet(cover, 'avif')}
+                          sizes='(min-width: 640px) 32vw, 94vw'
+                          type='image/avif'
+                        />
+                        <source
+                          srcSet={getImageSrcSet(cover, 'webp')}
+                          sizes='(min-width: 640px) 32vw, 94vw'
+                          type='image/webp'
+                        />
+                        <img
+                          src={getImageSrc(cover, 'lg')}
+                          alt={cover.alt}
+                          loading='lazy'
+                          decoding='async'
+                          style={{ objectPosition: theme.coverPosition ?? 'center' }}
+                          className='h-full w-full object-cover transition-transform duration-700 ease-editorial group-hover:scale-[1.1]'
+                        />
+                      </picture>
+                    </div>
                     <span
-                      className={cn(
-                        'min-w-0 flex-1 font-display font-light leading-tight tracking-[-0.02em] text-balance',
-                        theme.slug === 'zgk' ? 'text-sm sm:text-base' : 'text-base sm:text-lg'
-                      )}
-                    >
-                      {theme.name}
-                    </span>
-                    <span className='shrink-0 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--paper)]/75'>
-                      {getThemeCount(theme)} Bilder
-                    </span>
-                  </figcaption>
-                </figure>
-              </Link>
-            </motion.li>
-          ))}
+                      aria-hidden='true'
+                      className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgb(10_10_10_/_55%)_100%)] opacity-90 transition-opacity duration-300 group-hover:opacity-100'
+                    />
+                    <figcaption className='absolute inset-x-3 bottom-3 flex items-end justify-between gap-2 text-[var(--paper)] sm:inset-x-4 sm:bottom-4'>
+                      <span
+                        className={cn(
+                          'min-w-0 flex-1 font-display font-light leading-tight tracking-[-0.02em] text-balance',
+                          theme.slug === 'zgk' ? 'text-sm sm:text-base' : 'text-base sm:text-lg'
+                        )}
+                      >
+                        {theme.name}
+                      </span>
+                      <span className='shrink-0 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--paper)]/75'>
+                        {getThemeCount(theme)} Bilder
+                      </span>
+                    </figcaption>
+                  </figure>
+                </Link>
+              </motion.li>
+            );
+          })}
         </MotionInView>
       </div>
     </section>

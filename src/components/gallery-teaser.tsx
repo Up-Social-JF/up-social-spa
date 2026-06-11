@@ -1,7 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
 import { motion, type Variants } from 'motion/react';
 import { Link } from 'react-router';
-import { ImageWatermark } from '@/components/image-watermark';
 import { MotionInView } from '@/components/motion/motion-in-view';
 import { galleryThemes, getImageSrc, getImageSrcSet, getThemeCount } from '@/content/gallery';
 import { cn } from '@/utils/cn';
@@ -108,7 +107,6 @@ export function GalleryTeaser({
                       />
                     </picture>
                   </div>
-                  <ImageWatermark size='sm' />
                   <span
                     aria-hidden='true'
                     className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgb(10_10_10_/_55%)_100%)] opacity-90 transition-opacity duration-300 group-hover:opacity-100'

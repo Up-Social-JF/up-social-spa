@@ -2,7 +2,6 @@ import * as React from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Dialog as DialogPrimitive } from 'radix-ui';
 import { type ImageVariantSet, getImageSrc, getImageSrcSet } from '@/content/gallery';
-import { ImageWatermark } from '@/components/image-watermark';
 import { cn } from '@/utils/cn';
 
 type LightboxProps = {
@@ -138,7 +137,6 @@ export function Lightbox({ images, index, onIndexChange, themeName }: LightboxPr
                     className='h-full w-full object-contain'
                   />
                 </picture>
-                <ImageWatermark size='lg' />
               </div>
             ) : null}
 

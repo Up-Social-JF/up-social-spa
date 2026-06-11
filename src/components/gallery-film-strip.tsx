@@ -6,7 +6,6 @@ import {
   getImageSrc,
   getImageSrcSet,
 } from '@/content/gallery';
-import { ImageWatermark } from '@/components/image-watermark';
 
 type GalleryFilmStripProps = {
   images: ImageVariantSet[];
@@ -148,8 +147,18 @@ export function GalleryFilmStrip({
             aria-label={`${video.label} — auf YouTube ansehen`}
             onClick={(event) => {
               const d = dragRef.current;
-              // Suppress navigation only when the click ends a drag of the strip.
-              if (d && d.moved > DRAG_THRESHOLD_PX) event.preventDefault();
+              dragRef.current = null;
+              // A click that ends a strip drag should not navigate.
+              if (d && d.moved > DRAG_THRESHOLD_PX) {
+                event.preventDefault();
+                return;
+              }
+              // Let the browser handle modified clicks (new tab/window) natively.
+              if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+              // Otherwise open the link explicitly so the strip's pointer
+              // handling can never swallow the navigation.
+              event.preventDefault();
+              window.open(video.href, '_blank', 'noopener,noreferrer');
             }}
             className={`group relative shrink-0 overflow-hidden bg-[var(--color-bg-secondary)] shadow-[0_18px_44px_-28px_rgba(43,38,28,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-border-focus)] focus-visible:outline-offset-2 ${tileHeight}`}
             style={{ aspectRatio: tileAspect }}
@@ -223,7 +232,6 @@ export function GalleryFilmStrip({
             >
               {pad2(i + 1)}
             </span>
-            <ImageWatermark size='md' />
           </button>
         ))}
       </div>

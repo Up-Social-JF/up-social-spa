@@ -101,7 +101,6 @@ const KFO = 'KFO-Praxis';
 // ─── Gastro Events ────────────────────────────────────────────────────────────
 
 const GASTRO = 'EVENTS-GASTRO';
-const GASTRO_COUNT = 32;
 
 // Source indices that are ALSO featured in the People gallery. Their files carry
 // an "XX" suffix (gastro-1XX, …) so a multi-category image is recognizable in the
@@ -116,9 +115,13 @@ function gastroPost(i: number): GalleryPost {
   return { images: [img(GASTRO, gastroName(i), 'Gastro Event im Zum Goldenen Kalb')] };
 }
 
-const gastroPosts: GalleryPost[] = Array.from({ length: GASTRO_COUNT }, (_, k) =>
-  gastroPost(k + 1)
-);
+// Strip-Reihenfolge: erst Bilder ohne Personen (Szene / Produkt / Detail),
+// danach die Aufnahmen mit Personen. Zusammen alle 32 Gastro-Bilder.
+const gastroNoPeople = [7, 13, 14, 15, 16, 17, 18, 21, 24, 31, 32];
+const gastroWithPeople = [
+  1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 19, 20, 22, 23, 25, 26, 27, 28, 29, 30,
+];
+const gastroPosts: GalleryPost[] = [...gastroNoPeople, ...gastroWithPeople].map(gastroPost);
 
 // ─── Galleries ──────────────────────────────────────────────────────────────
 
@@ -127,8 +130,8 @@ export const galleryThemes: GalleryTheme[] = [
     slug: 'nature',
     name: 'Nature',
     description: 'Natürliche Bildwelten mit Ruhe, Tiefe und Textur.',
-    cover: img('Natur', 'natur-5', 'Naturfotografie als ruhiger Markenraum'),
-    landingCover: img('Landing', 'natur-5', 'Naturfotografie als ruhiger Markenraum'),
+    cover: img('Natur', 'natur-2', 'Naturfotografie als ruhiger Markenraum'),
+    landingCover: img('Landing', 'natur-2', 'Naturfotografie als ruhiger Markenraum'),
     posts: [9, 2, 6, '13N', 11, 4, 8, 12, 3, 7, 10, 5].map((id) => single('Natur', 'natur', id)),
     tileAspect: '16/9',
   },
@@ -138,16 +141,17 @@ export const galleryThemes: GalleryTheme[] = [
     description: 'Portraits und Menschen als nahbarer Markenanker.',
     cover: img(GASTRO, 'gastro-1XX', 'People — Portraits und Begegnungen'),
     landingCover: img('Landing', 'gastro-1XX', 'People — Portraits und Begegnungen'),
-    // 19 Bilder: 16 People-Aufnahmen + 3 Personen-Shots aus dem Gastro-Event,
-    // verteilt im Filmstrip (gastro-1XX/2XX/4XX — dieselben Dateien wie in Gastro).
+    // 16 Bilder: 12 People-Aufnahmen + 4 Personen-Shots aus dem Gastro-Event,
+    // verteilt im Filmstrip (gastro-1XX/2XX/4XX/27 — Event-Aufnahmen mit Personen).
     posts: [
-      single('People', 'people', 22),
+      ...[1, 9].map((id) => single('People', 'people', id)),
       gastroPost(1),
-      ...[3, 38, 13].map((id) => single('People', 'people', id)),
+      ...[3, 15].map((id) => single('People', 'people', id)),
       gastroPost(2),
-      ...[28, 9, 41].map((id) => single('People', 'people', id)),
+      ...[4, 17].map((id) => single('People', 'people', id)),
       gastroPost(4),
-      ...[17, 31, 4, 25, 44, 36, 18, 42, 8].map((id) => single('People', 'people', id)),
+      gastroPost(27),
+      ...[12, 10, 20, 14, 7, 18].map((id) => single('People', 'people', id)),
     ],
   },
   {

@@ -4,7 +4,7 @@
  * centered, uppercase, white at ~30% opacity.
  *
  * Processes (in place) all sizes/formats under:
- *   public/Webpage-Images/{Natur,People,ZGK,EVENTS,KFO-Praxis}
+ *   public/Webpage-Images/{Natur,People,ZGK,EVENTS,EVENTS-GASTRO,KFO-Praxis}
  *
  * Resumable: every finished file is recorded in .context/watermark-done.txt and
  * skipped on a re-run, so an interrupted run never double-stamps an image.
@@ -21,7 +21,7 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const BASE = join(ROOT, 'public/Webpage-Images');
-const GALLERIES = ['Natur', 'People', 'ZGK', 'EVENTS', 'KFO-Praxis'];
+const GALLERIES = ['Natur', 'People', 'ZGK', 'EVENTS', 'EVENTS-GASTRO', 'KFO-Praxis'];
 const MANIFEST = join(ROOT, '.context/watermark-done.txt');
 const CONCURRENCY = 5;
 

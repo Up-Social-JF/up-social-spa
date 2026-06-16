@@ -98,6 +98,28 @@ const herefordPost: GalleryPost = {
 
 const KFO = 'KFO-Praxis';
 
+// ─── Gastro Events ────────────────────────────────────────────────────────────
+
+const GASTRO = 'EVENTS-GASTRO';
+const GASTRO_COUNT = 32;
+
+// Source indices that are ALSO featured in the People gallery. Their files carry
+// an "XX" suffix (gastro-1XX, …) so a multi-category image is recognizable in the
+// repo; the on-site display order still follows the numeric prefix.
+const gastroMultiUse = new Set([1, 2, 4]);
+
+function gastroName(i: number): string {
+  return `gastro-${i}${gastroMultiUse.has(i) ? 'XX' : ''}`;
+}
+
+function gastroPost(i: number): GalleryPost {
+  return { images: [img(GASTRO, gastroName(i), 'Gastro Event im Zum Goldenen Kalb')] };
+}
+
+const gastroPosts: GalleryPost[] = Array.from({ length: GASTRO_COUNT }, (_, k) =>
+  gastroPost(k + 1)
+);
+
 // ─── Galleries ──────────────────────────────────────────────────────────────
 
 export const galleryThemes: GalleryTheme[] = [
@@ -114,11 +136,19 @@ export const galleryThemes: GalleryTheme[] = [
     slug: 'people',
     name: 'People',
     description: 'Portraits und Menschen als nahbarer Markenanker.',
-    cover: img('People', 'people-1', 'People — Portraits und Begegnungen'),
-    landingCover: img('Landing', 'people-1', 'People — Portraits und Begegnungen'),
-    posts: [22, 3, 38, 13, 28, 9, 41, 17, 31, 4, 25, 44, 36, 1, 18, 42, 8, 33, 15, 21].map((id) =>
-      single('People', 'people', id)
-    ),
+    cover: img(GASTRO, 'gastro-1XX', 'People — Portraits und Begegnungen'),
+    landingCover: img('Landing', 'gastro-1XX', 'People — Portraits und Begegnungen'),
+    // 19 Bilder: 16 People-Aufnahmen + 3 Personen-Shots aus dem Gastro-Event,
+    // verteilt im Filmstrip (gastro-1XX/2XX/4XX — dieselben Dateien wie in Gastro).
+    posts: [
+      single('People', 'people', 22),
+      gastroPost(1),
+      ...[3, 38, 13].map((id) => single('People', 'people', id)),
+      gastroPost(2),
+      ...[28, 9, 41].map((id) => single('People', 'people', id)),
+      gastroPost(4),
+      ...[17, 31, 4, 25, 44, 36, 18, 42, 8].map((id) => single('People', 'people', id)),
+    ],
   },
   {
     slug: 'zgk',
@@ -129,12 +159,20 @@ export const galleryThemes: GalleryTheme[] = [
     posts: [herefordPost, janbullPost, ...ambientePosts],
   },
   {
-    slug: 'events',
-    name: 'Events',
-    description: 'Live-Momente, Stimmung und echte Begegnungen auf Events.',
-    cover: img('EVENTS', 'events-6N', 'Events — Stimmung und Begegnungen'),
-    landingCover: img('Landing', 'events-6N', 'Events — Stimmung und Begegnungen'),
+    slug: 'sport-events',
+    name: 'Sport Events',
+    description: 'Live-Momente, Tempo und echte Begegnungen bei Sport-Events.',
+    cover: img('EVENTS', 'events-6N', 'Sport Events — Stimmung und Begegnungen'),
+    landingCover: img('Landing', 'events-6N', 'Sport Events — Stimmung und Begegnungen'),
     posts: (['1N', '2N', '3N', '4N', '6N'] as const).map((id) => single('EVENTS', 'events', id)),
+  },
+  {
+    slug: 'gastro-events',
+    name: 'Gastro Events',
+    description: 'Genuss, Gäste und Atmosphäre bei Gastro-Events.',
+    cover: img(GASTRO, 'gastro-13', 'Gastro Event im Zum Goldenen Kalb'),
+    landingCover: img('Landing', 'gastro-13', 'Gastro Event im Zum Goldenen Kalb'),
+    posts: gastroPosts,
   },
   {
     slug: 'praxen',
